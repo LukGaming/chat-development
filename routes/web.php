@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use  App\Http\Controllers\perfilFill;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,9 +20,5 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
-
-Route::get('count', function(){
-    return view('counter/counter');
-});
-
+Route::resource('perfilFill', perfilFill::class);
 require __DIR__.'/auth.php';
