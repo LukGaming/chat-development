@@ -7,8 +7,11 @@
     <title>Document</title>
 </head>
 <body>
-@livewireStyles
-    @livewire('counter')
-@livewireScripts
+    <form action="{{route('PerfilFillControler@store', ['user_id'=>Auth::id()])}}" method="post">
+        @csrf
+    
+        <input type="submit">
+
+    </form>
 </body>
 </html>

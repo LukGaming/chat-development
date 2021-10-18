@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\perfilFill;
 use Illuminate\Http\Request;
-class perfilFill extends Controller
+use Illuminate\Support\Facades\Auth;
+
+
+class PerfilFillController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -12,7 +16,13 @@ class perfilFill extends Controller
      */
     public function index()
     {
-        $teste = perfilFill::get();
+        //Creating User after registering in the system
+       /*perfilFill::create(['user_name_that_others_can_see'=>'teste',
+       'profile_phrase'=>'teste',
+       'image_perfil_path'=>'teste', 'user_id'=>Auth::id()]);*/
+       /*$usuarios = perfilFill::first();
+       dd($usuarios);*/
+       return view('perfilFill/index');
     }
 
     /**
@@ -39,10 +49,10 @@ class perfilFill extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\perfilFill  $perfilFill
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(perfilFill $perfilFill)
     {
         //
     }
@@ -50,10 +60,10 @@ class perfilFill extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\perfilFill  $perfilFill
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(perfilFill $perfilFill)
     {
         //
     }
@@ -62,10 +72,10 @@ class perfilFill extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\perfilFill  $perfilFill
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, perfilFill $perfilFill)
     {
         //
     }
@@ -73,10 +83,10 @@ class perfilFill extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\perfilFill  $perfilFill
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(perfilFill $perfilFill)
     {
         //
     }
