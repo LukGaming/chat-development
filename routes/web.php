@@ -22,4 +22,5 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 Route::any('/createperfil', [PerfilFillController::class, 'index']);
 Route::any('/storeperfil', [PerfilFillController::class, 'store']);
+
 require __DIR__.'/auth.php';

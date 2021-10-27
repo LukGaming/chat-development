@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="{{route('PerfilFillControler@store', ['user_id'=>Auth::id()])}}" method="post">
+    <form action="{{route('PerfilFillControler.store', ['user_id'=>Auth::id()])}}" method="post">
         @csrf
     
         <input type="submit">
