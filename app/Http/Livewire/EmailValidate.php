@@ -22,4 +22,4 @@ class EmailValidate extends Component
             $this->dispatchBrowserEvent('email-valido');
         }
     }
-}
+    }

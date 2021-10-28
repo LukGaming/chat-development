@@ -1,7 +1,8 @@
 <?php
 
+use App\Http\Controllers\PerfilFillController;
 use Illuminate\Support\Facades\Route;
-use  App\Http\Controllers\PerfilFillController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,10 +18,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-Route::any('/createperfil', [PerfilFillController::class, 'index']);
-Route::any('/storeperfil', [PerfilFillController::class, 'store']);
+Route::resource('perfilFill', PerfilFillController::class);
 
 require __DIR__.'/auth.php';
