@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\User;
+
 class EmailValidate extends Component
 {
     public $email;
@@ -11,15 +12,15 @@ class EmailValidate extends Component
     {
         return view('livewire.email-validate');
     }
-    public function validaEmail(){
-        if(!$this->email) return;
+    public function validaEmail()
+    {
+        if (!$this->email) return;
         $emails = User::where('email', $this->email)->get();
-        if(count($emails)>0){
+        if (count($emails) > 0) {
             $this->dispatchBrowserEvent('email-invalido');
             session()->flash('message', 'Este email já está em uso!');
-        }
-        else{
+        } else {
             $this->dispatchBrowserEvent('email-valido');
         }
     }
-    }
+}

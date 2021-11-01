@@ -12,10 +12,11 @@
   </head>
   <body>
    @livewireStyles
+   @livewireScripts
 
    @livewire('perfill-fill-create')
 
-   @livewireScripts
+
 
 
 

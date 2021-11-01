@@ -1,25 +1,46 @@
 <div>
 
-    <div class="container">
-        <div class="d-flex justify-content-center">
+    <div class="container border border-dark">
+        <div class="d-flex justify-content-center" style="margin-bottom: 20px">
             <h1>Preenchimento de perfil</h1>
         </div>
         <form>
-            <div class="form-group">
-                <label for="nome_amostra">Nome a ficar a amostra parar demais usuários</label>
-                <input type="email" class="form-control" id="nome_amostra" aria-describedby="emailHelp"
-                    placeholder="Enter email">
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            <div class="form-group mx-auto" style="margin-bottom: 20px">
+                <label for="nome_amostra" class="h5">Nome para ficar a amostra para os demais
+                    usuários</label>
+                <input type="text" class="form-control " id="nome_amostra" placeholder="Nome">
+            </div>
+            <div class="form-group" style="margin-bottom: 20px">
+                <label for="frase_perfil" class="h5">Frase de perfil para ser mostrada para outros
+                    usuários</label>
+                <input type="text" class="form-control" id="frase_perfil" placeholder="Frase de perfil">
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                @if ($photo)
+                    <div class="row d-flex justify-content-center border border border-dark">
+                        <div class="col-6">
+                            <picture>
+                                <img src="{{ $photo }}" class="img-fluid" alt="...">
+                            </picture>
+                        </div>
+                    </div>
+                @endif
+                <label for="image_perfil">Selecionar Imagem de perfil</label><br>
+                <input type="file" class="form-control-file" id="image_perfil" wire:change="$emit('fileChoosen')">
+
             </div>
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Check me out</label>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
         </form>
+        <script>
+            window.livewire.on('fileChoosen', () => {
+                let inputFile = document.getElementById("image_perfil");
+                file = inputFile.files[0];
+                console.log(file)
+                let reader = new FileReader();
+                reader.onloadend = () => {
+                    window.livewire.emit('fileUpload', reader.result);
+                }
+                reader.readAsDataURL(file);
+            });
+        </script>
     </div>
 </div>
