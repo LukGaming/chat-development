@@ -5,6 +5,10 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\perfilFill;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
+use Intervention\Image\ImageManagerStatic;
+use Illuminate\Support\Str;
 
 class PerfillFillCreate extends Component
 {
@@ -29,6 +33,7 @@ class PerfillFillCreate extends Component
                 session()->flash('erro_nome', 'O Nome deve conter no máximo 50 caracteres');
             }
         } else {
+            session()->flash('erro_nome', 'O Nome não pode ficar vazio!');
         }
     }
     public function validaFrasePerfil()
@@ -39,10 +44,19 @@ class PerfillFillCreate extends Component
             }
         }
     }
-    public function terminaCadastro(){
+    public function terminaCadastro()
+    {
         $this->validaFrasePerfil();
         $this->validaNome();
-        ImageManagerStatic
-        
+        if (session("erro_frase") || session("erro_nome")) {
+            $this->validaFrasePerfil();
+            $this->validaNome();
+        } else {
+            if ($this->photo) {
+                $img = ImageManagerStatic::make($this->photo)->encode('jpg');
+                $name = Str::random();
+                Storage::disk('public')->put($name . '.jpg', $img);
+            }
+        }
     }
 }
