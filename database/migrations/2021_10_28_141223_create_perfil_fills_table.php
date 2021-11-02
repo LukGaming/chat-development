@@ -15,6 +15,9 @@ class CreatePerfilFillsTable extends Migration
     {
         Schema::create('perfil_fills', function (Blueprint $table) {
             $table->id();
+            $table->string("nome");
+            $table->string("descricao_perfil")->nullable();
+            $table->string("caminho_imagem_perfil")->nullable();
             $table->timestamps();
         });
     }

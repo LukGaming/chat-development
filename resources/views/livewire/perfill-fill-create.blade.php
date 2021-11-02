@@ -4,22 +4,38 @@
         <div class="d-flex justify-content-center" style="margin-bottom: 20px">
             <h1>Preenchimento de perfil</h1>
         </div>
-        <form>
+        <form wire:submit.prevent="terminaCadastro">
             <div class="form-group mx-auto" style="margin-bottom: 20px">
                 <label for="nome_amostra" class="h5">Nome para ficar a amostra para os demais
                     usuários</label>
-                <input type="text" class="form-control " id="nome_amostra" placeholder="Nome">
+                <input type="text" class="form-control " id="nome_amostra" placeholder="Nome" wire:model="nome"
+                    wire:keydown.debounce.500ms="validaNome()">
+                <div>
+                    @if (session()->has('erro_nome'))
+                        <br>
+                        <div class="alert alert-danger">
+                            {{ session('erro_nome') }}
+                        </div>
+                    @endif
+                </div>
             </div>
             <div class="form-group" style="margin-bottom: 20px">
                 <label for="frase_perfil" class="h5">Frase de perfil para ser mostrada para outros
                     usuários</label>
-                <input type="text" class="form-control" id="frase_perfil" placeholder="Frase de perfil">
+                <input type="text" class="form-control" id="frase_perfil" placeholder="Frase de perfil"
+                    wire:model="frase_perfil" wire:keydown.debounce.500ms="validaFrasePerfil()">
+                @if (session()->has('erro_frase'))
+                    <br>
+                    <div class="alert alert-danger">
+                        {{ session('erro_frase') }}
+                    </div>
+                @endif
             </div>
-            <div class="form-group espacamento_padrao" >
+            <div class="form-group espacamento_padrao">
                 @if ($photo)
-                    <div class="row d-flex justify-content-center   ">
+                    <div class="row d-flex justify-content-center">
                         <div class="col-6">
-                            <picture >
+                            <picture>
                                 <img src="{{ $photo }}" class="img-fluid" alt="..." style="height: 30rem">
                             </picture>
                         </div>
@@ -30,8 +46,8 @@
 
             </div>
             <div class="d-flex justify-content-center">
-            <button type="submit" class="btn btn-primary">Continuar</button>
-        </div>
+                <button type="submit" class="btn btn-primary">Continuar</button>
+            </div>
         </form>
         <script>
             window.livewire.on('fileChoosen', () => {
