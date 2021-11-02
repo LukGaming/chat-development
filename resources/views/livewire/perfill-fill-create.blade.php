@@ -1,6 +1,6 @@
 <div>
 
-    <div class="container border border-dark">
+    <div class="container border border-dark espacamento_padrao" style="margin-top: 2em">
         <div class="d-flex justify-content-center" style="margin-bottom: 20px">
             <h1>Preenchimento de perfil</h1>
         </div>
@@ -15,20 +15,23 @@
                     usuários</label>
                 <input type="text" class="form-control" id="frase_perfil" placeholder="Frase de perfil">
             </div>
-            <div class="form-group">
+            <div class="form-group espacamento_padrao" >
                 @if ($photo)
-                    <div class="row d-flex justify-content-center border border border-dark">
+                    <div class="row d-flex justify-content-center   ">
                         <div class="col-6">
-                            <picture>
-                                <img src="{{ $photo }}" class="img-fluid" alt="...">
+                            <picture >
+                                <img src="{{ $photo }}" class="img-fluid" alt="..." style="height: 30rem">
                             </picture>
                         </div>
                     </div>
                 @endif
-                <label for="image_perfil">Selecionar Imagem de perfil</label><br>
+                <label for="image_perfil " class="h5">Selecionar Imagem de perfil</label><br>
                 <input type="file" class="form-control-file" id="image_perfil" wire:change="$emit('fileChoosen')">
 
             </div>
+            <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary">Continuar</button>
+        </div>
         </form>
         <script>
             window.livewire.on('fileChoosen', () => {
