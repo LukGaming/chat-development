@@ -11,7 +11,8 @@ class perfilFill extends Model
     protected $fillable = [
         "nome",
         "descricao_perfil",
-        "caminho_imagem_perfil"
+        "caminho_imagem_perfil",
+        "user_id"
     ];
    
 }

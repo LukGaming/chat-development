@@ -18,6 +18,8 @@ class CreatePerfilFillsTable extends Migration
             $table->string("nome");
             $table->string("descricao_perfil")->nullable();
             $table->string("caminho_imagem_perfil")->nullable();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

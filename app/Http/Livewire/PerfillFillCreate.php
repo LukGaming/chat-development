@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\perfilFill;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Intervention\Image\ImageManagerStatic;
@@ -31,32 +32,64 @@ class PerfillFillCreate extends Component
         if ($this->nome) {
             if (strlen($this->nome) > 50) {
                 session()->flash('erro_nome', 'O Nome deve conter no máximo 50 caracteres');
+                return false;
             }
         } else {
             session()->flash('erro_nome', 'O Nome não pode ficar vazio!');
+            return false;
         }
+        return true;
     }
     public function validaFrasePerfil()
     {
         if ($this->frase_perfil) {
             if (strlen($this->frase_perfil) > 100) {
                 session()->flash('erro_frase', 'A frase de perfil  deve conter no máximo 100 caracteres');
+                return false;
             }
+            return true;
         }
     }
     public function terminaCadastro()
     {
-        $this->validaFrasePerfil();
-        $this->validaNome();
+        if ($this->validaFrasePerfil() && $this->validaNome()) {
+            $this->storePerfilDataBase();
+        }
         if (session("erro_frase") || session("erro_nome")) {
             $this->validaFrasePerfil();
             $this->validaNome();
+        } else { //tudo foi validado, agora iremos salvar a image, e salvar os dados no banco de dados
+            //Aqui executará a funcao storeperfildatabase
+            $this->storePerfilDataBase();
+        }
+    }
+    public function storeImage()
+    {
+        if ($this->photo) {
+            $img = ImageManagerStatic::make($this->photo)->encode('jpg');
+            $name = Str::random();
+            Storage::disk('public')->put($name . '.jpg', $img);
+            return $name . ".jpg";
+        }
+        return false;
+    }
+    public function storePerfilDataBase()
+    {
+        $nome_imagem = $this->storeImage();
+        if ($nome_imagem != false) {
+            perfilFill::create([
+                'nome' => $this->nome,
+                'descricao_perfil' => $this->frase_perfil,
+                'user_id' => Auth::id(),
+                'caminho_imagem_perfil' => $nome_imagem
+            ]);
         } else {
-            if ($this->photo) {
-                $img = ImageManagerStatic::make($this->photo)->encode('jpg');
-                $name = Str::random();
-                Storage::disk('public')->put($name . '.jpg', $img);
-            }
+            perfilFill::create([
+                'nome' => $this->nome,
+                'descricao_perfil' => $this->frase_perfil,
+                'user_id' => Auth::id(),
+                'caminho_imagem_perfil' => null
+            ]);
         }
     }
 }
