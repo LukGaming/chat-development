@@ -54,8 +54,7 @@ class PerfillFillCreate extends Component
     {
         if ($this->validaFrasePerfil() && $this->validaNome()) {
             $this->storePerfilDataBase();
-        }
-        else if (session("erro_frase") || session("erro_nome")) {
+        } else if (session("erro_frase") || session("erro_nome")) {
             $this->validaFrasePerfil();
             $this->validaNome();
         } else { //tudo foi validado, agora iremos salvar a image, e salvar os dados no banco de dados
@@ -69,7 +68,6 @@ class PerfillFillCreate extends Component
             $name = Str::random();
             Storage::disk('public')->put($name . '.jpg', $img);
             $nome_completo = $name . ".jpg";
-            
             return $nome_completo;
         }
         return false;
