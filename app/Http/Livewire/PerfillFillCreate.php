@@ -55,27 +55,28 @@ class PerfillFillCreate extends Component
         if ($this->validaFrasePerfil() && $this->validaNome()) {
             $this->storePerfilDataBase();
         }
-        if (session("erro_frase") || session("erro_nome")) {
+        else if (session("erro_frase") || session("erro_nome")) {
             $this->validaFrasePerfil();
             $this->validaNome();
         } else { //tudo foi validado, agora iremos salvar a image, e salvar os dados no banco de dados
-            //Aqui executará a funcao storeperfildatabase
             $this->storePerfilDataBase();
         }
     }
-    public function storeImage()
+    public function storePhoto()
     {
         if ($this->photo) {
             $img = ImageManagerStatic::make($this->photo)->encode('jpg');
             $name = Str::random();
             Storage::disk('public')->put($name . '.jpg', $img);
-            return $name . ".jpg";
+            $nome_completo = $name . ".jpg";
+            
+            return $nome_completo;
         }
         return false;
     }
     public function storePerfilDataBase()
     {
-        $nome_imagem = $this->storeImage();
+        $nome_imagem = $this->storePhoto();
         if ($nome_imagem != false) {
             perfilFill::create([
                 'nome' => $this->nome,

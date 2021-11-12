@@ -14,5 +14,4 @@ class perfilFill extends Model
         "caminho_imagem_perfil",
         "user_id"
     ];
-   
 }

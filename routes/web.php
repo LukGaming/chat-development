@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\PerfilFillController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ContatoController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::any('/', [ContatoController::class, 'index']);
 
 Route::resource('perfilFill', PerfilFillController::class);
 
