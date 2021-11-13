@@ -18,6 +18,8 @@ class CreateContatosTable extends Migration
             $table->timestamps();
             $table->string("nome_contato");
             $table->string('email');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

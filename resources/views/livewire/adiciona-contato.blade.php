@@ -12,7 +12,9 @@
                 </div>
                 <div class="modal-body">
                     <form>
-
+                        <div class="alert alert-success" role="alert" id="contato_criado" style="display: none">
+                            Contato Criado com sucesso!
+                        </div>
                         <div class="form-group">
                             <label for="email">Endereço de Email</label>
                             <input type="email" class="form-control" id="email" placeholder="nome@exemplo.com"
@@ -33,7 +35,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" id="botao-desativa"
-                        wire:click="salvarContato()">Enviar pedido de Amizade</button>
+                        wire:click="salvarContato()">Adicionar</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                 </div>
             </div>
@@ -43,21 +45,19 @@
         window.addEventListener('erro_nome', event => {
             $("#erro_nome").html("Nome Invalido!");
             $("#erro_nome").show();
-            console.log("nome invalido");
         })
         window.addEventListener('erro_email', event => {
             $("#erro_email").html("Email Invalido!");
             $("#erro_email").show();
-
         })
         window.addEventListener('email_valido', event => {
-             $("#erro_email").hide();
-            console.log("email valido")
+            $("#erro_email").hide();
         })
         window.addEventListener('nome_valido', event => {
-            console.log("nome valido")
-
             $("#erro_nome").hide();
+        })
+        window.addEventListener('contato_criado', event => {
+            $("#contato_criado").show();
         })
     </script>
 

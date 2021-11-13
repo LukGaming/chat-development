@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Contato;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 use function PHPSTORM_META\type;
@@ -16,33 +18,29 @@ class AdicionaContato extends Component
     }
     public function salvarContato()
     {
-
-        if (!$this->email || $this->email == "") {
-            if (!$this->email || $this->email == "") {
-                //Aqui retorna o erro do email
-                $this->erroNome();
-            } else {
-                $this->nomeValido();
-            }
-            if (!$this->nome_contato || $this->nome_contato == "") {
-                //Aqui retorna o erro do nome
-                $this->erroEmail();
-            } else {
-                $this->emailValido();
-            }
-        }
-        if (!$this->nome_contato || $this->nome_contato == "") {
-            //Aqui retorna o erro do nome
+        //Se os campos de email ficarem vazios, chamar a função erro email
+        if (gettype($this->email) == "NULL" || $this->email == "") {
             $this->erroEmail();
         } else {
             $this->emailValido();
         }
-        if ($this->email) {
-            $this->emailValido();
-        }
-        if ($this->nome_contato) {
+        if (gettype($this->nome_contato) == "NULL" || $this->nome_contato == "") {
+            $this->erroNome();
+        } else {
             $this->nomeValido();
         }
+        if (gettype($this->email) == "NULL" || $this->email == "" || gettype($this->nome_contato) == "NULL" || $this->nome_contato == "") {
+        } else { //Aqui é onde passaram todas as configurações, então agora, salvar no banco de dados
+            Contato::create(["nome_contato" => $this->nome_contato, "email" => $this->email, "user_id" => Auth::id()]);
+            $this->contatoCriado();
+            $this->nome_contato = "";
+            $this->email = "";
+            $this->emit('some-event');
+        }
+    }
+    public function contatoCriado()
+    {
+        $this->dispatchBrowserEvent('contato_criado');
     }
     public function erroNome()
     {
