@@ -86,9 +86,10 @@
         left: 50%;
         transform: translate(-50%, -50%);
         display: none;
-        
+
     }
-    .centered-text{
+
+    .centered-text {
         font-size: 25px;
         color: ;
     }
@@ -97,7 +98,8 @@
         display: flex;
         background-color: black;
     }
-    .centered:hover{
+
+    .centered:hover {
         display: flex;
         background-color: black;
     }
@@ -121,10 +123,20 @@
     <div id="mySidenav" class="sidenav" style=" z-index: 1">
         <div class="d-flex justify-content-center">
             @if ($dados_perfil->caminho_imagem_perfil)
-                <label for="upload_image"> <img src="{{ asset('storage/' . $dados_perfil->caminho_imagem_perfil) }}"
-                        class="imagem_perfil rounded rounded-circle w-75  ">
-                </label>
-
+                <div class="container-img ">
+                    <div>
+                        <label for="upload_image">
+                            <img src="{{ asset('storage/' . $dados_perfil->caminho_imagem_perfil) }}"
+                                class="imagem_perfil rounded rounded-circle w-75  ">
+                            <div class="centered">
+                                <img src="{{ asset('storage/camera-solid.svg') }}" class="img-thumbnail"
+                                    style="width: 50px">
+                                <div class="centered-text">Mudar Foto de Perfil</div>
+                            </div>
+                        </label>
+                    </div>
+                    <input type="file" id="upload_image" style="display: none;">
+                </div>
             @else
                 <div class="container-img ">
                     <div>
@@ -147,7 +159,6 @@
         <a href="#">Services</a>
         <a href="#">Clients</a>
         <a href="#">Contact</a>
-
     </div>
 
     <div class="container border-top border-dark" style="height: 100ch; margin-top: 5ch">
