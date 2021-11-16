@@ -52,6 +52,14 @@
         display: block;
         transition: 0.3s;
     }
+    .text-inside-sidebar{
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+    }
 
     /* When you mouse over the navigation links, change their color */
     .sidenav a:hover {
@@ -120,7 +128,13 @@
 <body>
     @livewireScripts
     @livewireStyles
-    <div id="mySidenav" class="sidenav" style=" z-index: 1">
+    
+    {{-- Side Nav Contatos --}}
+    @livewire('listade-contatos')
+    {{-- Side Nav Contatos --}}
+
+    {{-- Side Nav Perfil --}}
+    <div id="mySidenavPerfil" class="sidenav" style=" z-index: 1">
         <div class="d-flex justify-content-center">
             @if ($dados_perfil->caminho_imagem_perfil)
                 <div class="container-img ">
@@ -154,12 +168,15 @@
                 </div>
             @endif
         </div>
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNavPerfil()">&times;</a>
         <a href="#">About</a>
         <a href="#">Services</a>
         <a href="#">Clients</a>
         <a href="#">Contact</a>
     </div>
+    {{-- Side Nav Perfil --}}
+
+
 
     <div class="container border-top border-dark" style="height: 100ch; margin-top: 5ch">
         <div class="row">
@@ -168,10 +185,10 @@
                     <a class="navbar-brand" href="#">
                         @if ($dados_perfil->caminho_imagem_perfil)
                             <img src="{{ asset('storage/' . $dados_perfil->caminho_imagem_perfil) }}"
-                                class="imagem_perfil rounded rounded-circle w-75  " onclick="openAndCloseNav()">
+                                class="imagem_perfil rounded rounded-circle w-75  " onclick="openAndCloseNavOfPerfil()">
                         @else
                             <img src="{{ asset('storage/default_user.png') }}"
-                                class="imagem_perfil rounded rounded-circle w-75  " onclick="openAndCloseNav()">
+                                class="imagem_perfil rounded rounded-circle w-75  " onclick="openAndCloseNavOfPerfil()">
                         @endif
                     </a>
                     <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -183,8 +200,7 @@
                             <li class="nav-item " id="contatos">
                                 <a class="nav-link" href="#">
                                     <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-dark" data-toggle="modal"
-                                        data-target="#exampleModal">
+                                    <button type="button" class="btn btn-dark" onclick="openAndCloseNavOfContatos()">
                                         <div class="d-flex justify-content-center">Contatos</div>
 
                                     </button>
@@ -233,15 +249,15 @@
                                     <a class="dropdown-item">Another action</a>
                                     <a class="dropdown-item">Something else here</a>
                                     <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item">
-                                            <form method="POST" action="{{ route('logout') }}">
-                                                @csrf
-                                
-                                                <button type="submit" class="btn">
-                                                    Desconectar
-                                                </button>
-                                            </form>
-                                        </a>
+                                    <a class="dropdown-item">
+                                        <form method="POST" action="{{ route('logout') }}">
+                                            @csrf
+
+                                            <button type="submit" class="btn">
+                                                Desconectar
+                                            </button>
+                                        </form>
+                                    </a>
                                 </div>
                                 @livewire('adiciona-contato')
                             </li>
@@ -414,24 +430,48 @@
         </div>
     </div>
     <script>
-        function openAndCloseNav() {
-            if ($navOpen == true) {
-                closeNav();
+        function openAndCloseNavOfPerfil() {
+            if ($navOpenPerfil == true) {
+                closeNavPerfil();
             } else {
-                openNav();
+                openNavPerfil();
             }
         }
-        var $navOpen = "";
+        var $navOpenPerfil = "";
 
-        function openNav() {
-            document.getElementById("mySidenav").style.width = "25%";
-            $navOpen = true;
+        function openNavPerfil() {
+            document.getElementById("mySidenavPerfil").style.width = "25%";
+            $navOpenPerfil = true;
         }
 
-        function closeNav() {
-            document.getElementById("mySidenav").style.width = "0";
-            $navOpen = false;
+        function closeNavPerfil() {
+            document.getElementById("mySidenavPerfil").style.width = "0";
+            $navOpenPerfil = false;
         }
+        //**Perfil**/
+
+
+
+        //**Contatos**/
+        function openAndCloseNavOfContatos() {
+            if ($navOpenContatos == true) {
+                closeNavContatos();
+            } else {
+                openNavContatos();
+            }
+        }
+        var $navOpenContatos = "";
+
+        function openNavContatos() {
+            document.getElementById("mySidenavContatos").style.width = "25%";
+            $navOpenContatos = true;
+        }
+
+        function closeNavContatos() {
+            document.getElementById("mySidenavContatos").style.width = "0";
+            $navOpenContatos = false;
+        }
+        //**Contatos**/
     </script>
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
