@@ -16,8 +16,8 @@ use App\Http\Controllers\ContatoController;
 |
 */
 
-Route::any('/', [ContatoController::class, 'index']);
+Route::any('/', [ContatoController::class, 'index'])->middleware('auth');
 
-Route::resource('perfilFill', PerfilFillController::class);
+Route::resource('perfilFill', PerfilFillController::class)->middleware('auth');
 
 require __DIR__.'/auth.php';

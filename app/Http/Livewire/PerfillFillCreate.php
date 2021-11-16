@@ -82,6 +82,7 @@ class PerfillFillCreate extends Component
                 'user_id' => Auth::id(),
                 'caminho_imagem_perfil' => $nome_imagem
             ]);
+            return redirect("/");
         } else {
             perfilFill::create([
                 'nome' => $this->nome,
@@ -89,6 +90,7 @@ class PerfillFillCreate extends Component
                 'user_id' => Auth::id(),
                 'caminho_imagem_perfil' => null
             ]);
+            
         }
     }
 }

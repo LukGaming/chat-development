@@ -207,7 +207,6 @@
                                                         @livewire('listade-contatos')
                                                     </div>
                                                 </div>
-
                                                 <div class="d-flex justify-content-around" style="padding: 5%">
 
                                                     <button type="button" class="btn btn-dark"
@@ -223,10 +222,10 @@
                                     <i style="font-size:16px; padding-right: -50% ;" class="fa">&#xf013;</i>
                                     </a>
                                 </div>
-                                <div class="dropdown-menu">
+                                <div class="dropdown-menu ">
                                     <div class="dropdown-item">
                                         <!-- Button trigger modal -->
-                                        <button type="button" class="btn " data-toggle="modal"
+                                        <button type="button" class="btn" data-toggle="modal"
                                             data-target="#exampleModal2">
                                             Novo Contato
                                         </button>
@@ -234,7 +233,15 @@
                                     <a class="dropdown-item">Another action</a>
                                     <a class="dropdown-item">Something else here</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item">Separated link</a>
+                                        <a class="dropdown-item">
+                                            <form method="POST" action="{{ route('logout') }}">
+                                                @csrf
+                                
+                                                <button type="submit" class="btn">
+                                                    Desconectar
+                                                </button>
+                                            </form>
+                                        </a>
                                 </div>
                                 @livewire('adiciona-contato')
                             </li>
