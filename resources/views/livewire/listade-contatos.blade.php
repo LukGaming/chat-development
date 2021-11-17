@@ -1,34 +1,34 @@
 <div>
-
-    <div id="mySidenavContatos" class="sidenav" style=" z-index: 1">
-        <div class="row d-flex justify-content-start">
-            <a href="javascript:void(0)" onclick="closeNavContatos()">&#129032;</a>
+    
+        <div id="mySidenavContatos" class="sidenav" style=" z-index: 1">
+            <div class="row d-flex justify-content-start">
+                <a href="javascript:void(0)" onclick="closeNavContatos()">&#129032;</a>
+            </div>
+            <div class="text-inside-sidebar">Seus Contatos</div>
+            <div class="d-flex justify-content-center">
+                <div class="border border-dark overflow-auto bg-dark text-light rounded style-overflow" style="height: 75vh;">
+                @foreach ($contatos as $contato)
+                    <div class="list-group " style="margin: 5px;" wire:click="BotaoClicado({{ $contato }})">
+                        <a href="#"
+                            class="list-group-item div-contato list-group-item-action flex-column align-items-start active">
+                            <div class="d-flex justify-content-between">
+                                @if ($contato->caminho_imagem_perfil)
+                                    <img src="{{ asset('storage/' . $contato->caminho_imagem_perfil) }}"
+                                        class="imagem_perfil_contato rounded rounded-circle w-25 ">
+                                @else
+                                    <img src="{{ asset('storage/default_user.png') }}"
+                                        class="imagem_perfil_contato rounded rounded-circle w-25 ">
+                                @endif
+                                <h6 class="nome-contato">{{ $contato->nome_contato }}</h6>
+                            </div>
+                        </a>
+                    </div>
+                
+                @endforeach
+            </div>
+            </div>
         </div>
-        <div class="text-inside-sidebar">Seus Contatos</div>
-        <div class="d-flex justify-content-center">
-            @foreach ($contatos as $contato)
-                <div class="list-group " style="margin: 5px;" wire:click="BotaoClicado({{ $contato }})">
-                    <a href="#"
-                        class="list-group-item div-contato list-group-item-action flex-column align-items-start active">
-                        <div class="d-flex justify-content-between">
-                            @if ($contato->caminho_imagem_perfil)
-                                <img src="{{ asset('storage/' . $contato->caminho_imagem_perfil) }}"
-                                    class="imagem_perfil_contato rounded rounded-circle w-25 ">
-                            @else
-                                <img src="{{ asset('storage/default_user.png') }}"
-                                    class="imagem_perfil_contato rounded rounded-circle w-25 ">
-                            @endif
-                            <h6 class="nome-contato">{{ $contato->nome_contato }}</h6>
-                        </div>
-                    </a>
-                </div>
-            @endforeach
-
-        </div>
-
-
-
-    </div>
+ 
 
 
 

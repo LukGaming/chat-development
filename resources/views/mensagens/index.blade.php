@@ -132,52 +132,11 @@
     {{-- Side Nav Contatos --}}
     @livewire('listade-contatos')
     {{-- Side Nav Contatos --}}
+ 
 
     {{-- Side Nav Perfil --}}
-    <div id="mySidenavPerfil" class="sidenav" style=" z-index: 1">
-        <div class="d-flex justify-content-center">
-            @if ($dados_perfil->caminho_imagem_perfil)
-                <div class="container-img ">
-                    <div>
-                        <label for="upload_image">
-                            <img src="{{ asset('storage/' . $dados_perfil->caminho_imagem_perfil) }}"
-                                class="imagem_perfil rounded rounded-circle w-75  ">
-                            <div class="centered">
-                                <img src="{{ asset('storage/camera-solid.svg') }}" class="img-thumbnail"
-                                    style="width: 50px">
-                                <div class="centered-text">Mudar Foto de Perfil</div>
-                            </div>
-                        </label>
-                    </div>
-                    <input type="file" id="upload_image" style="display: none;">
-                </div>
-            @else
-                <div class="container-img ">
-                    <div>
-                        <label for="upload_image">
-                            <img src="{{ asset('storage/default_user.png') }}"
-                                class="imagem_perfil rounded rounded-circle w-75  ">
-                            <div class="centered">
-                                <img src="{{ asset('storage/camera-solid.svg') }}" class="img-thumbnail"
-                                    style="width: 50px">
-                                <div class="centered-text">Mudar Foto de Perfil</div>
-                            </div>
-                        </label>
-                    </div>
-                    <input type="file" id="upload_image" style="display: none;">
-                </div>
-            @endif
-        </div>
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNavPerfil()">&times;</a>
-        <a href="#">About</a>
-        <a href="#">Services</a>
-        <a href="#">Clients</a>
-        <a href="#">Contact</a>
-    </div>
+    @livewire('change-photo-perfil', ['imagem_perfil' => $dados_perfil->caminho_imagem_perfil]);
     {{-- Side Nav Perfil --}}
-
-
-
     <div class="container border-top border-dark" style="height: 100ch; margin-top: 5ch">
         <div class="row">
             <div class="col-3 bg-dark border-bottom">
