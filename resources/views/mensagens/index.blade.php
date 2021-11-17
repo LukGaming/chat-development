@@ -52,7 +52,8 @@
         display: block;
         transition: 0.3s;
     }
-    .text-inside-sidebar{
+
+    .text-inside-sidebar {
         padding: 8px 8px 8px 32px;
         text-decoration: none;
         font-size: 25px;
@@ -128,11 +129,11 @@
 <body>
     @livewireScripts
     @livewireStyles
-    
+
     {{-- Side Nav Contatos --}}
     @livewire('listade-contatos')
     {{-- Side Nav Contatos --}}
- 
+
 
     {{-- Side Nav Perfil --}}
     @livewire('change-photo-perfil', ['imagem_perfil' => $dados_perfil->caminho_imagem_perfil]);
@@ -143,11 +144,11 @@
                 <nav class="navbar navbar-expand-lg navbar-dark ">
                     <a class="navbar-brand" href="#">
                         @if ($dados_perfil->caminho_imagem_perfil)
-                            <img src="{{ asset('storage/' . $dados_perfil->caminho_imagem_perfil) }}"
-                                class="imagem_perfil rounded rounded-circle w-75  " onclick="openAndCloseNavOfPerfil()">
+                            @livewire('imagem-perfil',['imagem'=>$dados_perfil->caminho_imagem_perfil])
+
                         @else
-                            <img src="{{ asset('storage/default_user.png') }}"
-                                class="imagem_perfil rounded rounded-circle w-75  " onclick="openAndCloseNavOfPerfil()">
+                            @livewire('imagem-perfil',['imagem'=>$dados_perfil->caminho_imagem_perfil])
+
                         @endif
                     </a>
                     <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNav"

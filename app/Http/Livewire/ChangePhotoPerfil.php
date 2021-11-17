@@ -36,5 +36,7 @@ class ChangePhotoPerfil extends Component
         //Fazendo update no banco de dados do caminho da imagem
         perfilFill::where('user_id', Auth::id())->update(['caminho_imagem_perfil'=>$name]);
         $this->imagem_perfil = $name;
+        $this->emit('foto_perfil_atualizada', $name);
+        
     }
 }
