@@ -136,7 +136,7 @@
 
 
     {{-- Side Nav Perfil --}}
-    @livewire('change-photo-perfil', ['imagem_perfil' => $dados_perfil->caminho_imagem_perfil]);
+    @livewire('change-photo-perfil', ['imagem_perfil' => $dados_perfil->caminho_imagem_perfil, 'nome'=>$dados_perfil->nome, 'descricao_perfil'=>$dados_perfil->descricao_perfil]);
     {{-- Side Nav Perfil --}}
     <div class="container border-top border-dark" style="height: 100ch; margin-top: 5ch">
         <div class="row">
@@ -145,10 +145,8 @@
                     <a class="navbar-brand" href="#">
                         @if ($dados_perfil->caminho_imagem_perfil)
                             @livewire('imagem-perfil',['imagem'=>$dados_perfil->caminho_imagem_perfil])
-
                         @else
                             @livewire('imagem-perfil',['imagem'=>$dados_perfil->caminho_imagem_perfil])
-
                         @endif
                     </a>
                     <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -162,7 +160,6 @@
                                     <!-- Button trigger modal -->
                                     <button type="button" class="btn btn-dark" onclick="openAndCloseNavOfContatos()">
                                         <div class="d-flex justify-content-center">Contatos</div>
-
                                     </button>
                                     <!-- Modal -->
                                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
