@@ -44,6 +44,6 @@ class ListadeContatos extends Component
     }
     public function BotaoClicado($contato)
     {
-        dd($contato);
+        $this->emit('conversaIniciada', $contato);
     }
 }

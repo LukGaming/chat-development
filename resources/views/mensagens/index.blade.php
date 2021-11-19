@@ -136,7 +136,8 @@
 
 
     {{-- Side Nav Perfil --}}
-    @livewire('change-photo-perfil', ['imagem_perfil' => $dados_perfil->caminho_imagem_perfil, 'nome'=>$dados_perfil->nome, 'descricao_perfil'=>$dados_perfil->descricao_perfil]);
+    @livewire('change-photo-perfil', ['imagem_perfil' => $dados_perfil->caminho_imagem_perfil,
+    'nome'=>$dados_perfil->nome, 'descricao_perfil'=>$dados_perfil->descricao_perfil]);
     {{-- Side Nav Perfil --}}
     <div class="container border-top border-dark" style="height: 100ch; margin-top: 5ch">
         <div class="row">
@@ -195,7 +196,7 @@
                                     <i style="font-size:16px; padding-right: -50% ;" class="fa">&#xf013;</i>
                                     </a>
                                 </div>
-                                <div class="dropdown-menu ">
+                                <div class="dropdown-menu " style="right: 0">
                                     <div class="dropdown-item">
                                         <!-- Button trigger modal -->
                                         <button type="button" class="btn" data-toggle="modal"
@@ -203,7 +204,8 @@
                                             Novo Contato
                                         </button>
                                     </div>
-                                    <a class="dropdown-item">Another action</a>
+                                    <a class="dropdown-item">
+                                        Another action</a>
                                     <a class="dropdown-item">Something else here</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item">
@@ -223,7 +225,7 @@
                 </nav>
             </div>
             <div class="col-9 bg-success border-bottom">
-
+                @livewire('perfil-user-mensagem')
             </div>
 
         </div>
@@ -260,7 +262,9 @@
             <div class="col-9 bg-success ">
                 <div class="border border-dark overflow-auto bg-dark text-light rounded style-overflow mt-3"
                     style="height: 75vh;">
-                    <div class="skype-parent ">
+                    @livewire('mensagens')
+                   
+                    {{-- <div class="skype-parent ">
                         <div class="message">
                             <div><img src="https://i.stack.imgur.com/1ZIkv.jpg?s=32&g=1"></div>
                             <div>
@@ -369,7 +373,7 @@
                             </div>
                             <div>08:42</div>
                         </div>
-                    </div>
+                    </div> 
                     <div class="d-flex justify-content-center ">
                         <div class="sub_div ">
                             <div class="form-row">
@@ -383,6 +387,7 @@
                         </div>
                     </div>
                 </div>
+                --}}
             </div>
         </div>
     </div>
