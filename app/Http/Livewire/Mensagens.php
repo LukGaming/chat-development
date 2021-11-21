@@ -28,6 +28,8 @@ class Mensagens extends Component
         $this->contato["imagem_perfil"] = $contato["caminho_imagem_perfil"];
         $this->messages = mensagen::where('sendFromUser', Auth::id())->where('sendToUser', $this->contato["owner_user"])->orWhere('sendToUser', Auth::id())->where('sendFromUser', $this->contato["owner_user"])
             ->get();
+            $this->dispatchBrowserEvent('iniciando_conversa');
+            
         //dd($this->messages);
     }
     public function sendMessage()
@@ -41,7 +43,6 @@ class Mensagens extends Component
                 "sendToUser" => $this->contato["owner_user"]
             ]);
             $this->inputMessage = "";
-            //dd($this->contato["owner_user"]);
             $this->emit('mensagem_enviada', $this->contato["owner_user"]);
         }
     }
@@ -49,5 +50,16 @@ class Mensagens extends Component
     {
         $this->messages = mensagen::where('sendFromUser', Auth::id())->where('sendToUser', $this->contato["owner_user"])->orWhere('sendToUser', Auth::id())->where('sendFromUser', $this->contato["owner_user"])
             ->get();
+            $this->dispatchBrowserEvent('mensagem_enviada');
+    }
+    public function atualizando_mensagens()
+    {
+        $novas_mensagens = mensagen::where('sendFromUser', Auth::id())->where('sendToUser', $this->contato["owner_user"])->orWhere('sendToUser', Auth::id())->where('sendFromUser', $this->contato["owner_user"])
+            ->get();
+        if(count($novas_mensagens) != count($this->messages)){
+            $this->messages = $novas_mensagens;
+            $this->dispatchBrowserEvent('nova_mensagem', ['contato'=>$this->contato]);
+        }
+        
     }
 }

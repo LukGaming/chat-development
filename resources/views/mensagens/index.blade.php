@@ -261,7 +261,7 @@
             </div>
             <div class="col-9 bg-success ">
                 <div class="border border-dark overflow-auto bg-dark text-light rounded style-overflow mt-3"
-                    style="height: 75vh;">
+                    style="height: 75vh;" id="scrollbar">
                     @livewire('mensagens')
                    
                     {{-- <div class="skype-parent ">
@@ -433,6 +433,7 @@
             document.getElementById("mySidenavContatos").style.width = "0";
             $navOpenContatos = false;
         }
+        
         //**Contatos**/
     </script>
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
