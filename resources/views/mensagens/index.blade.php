@@ -263,196 +263,63 @@
                 <div class="border border-dark overflow-auto bg-dark text-light rounded style-overflow mt-3"
                     style="height: 75vh;" id="scrollbar">
                     @livewire('mensagens')
-                   
-                    {{-- <div class="skype-parent ">
-                        <div class="message">
-                            <div><img src="https://i.stack.imgur.com/1ZIkv.jpg?s=32&g=1"></div>
-                            <div>
-                                <p>It's easy!</p>
-                            </div>
-                            <div>08:40</div>
-                        </div>
-                        <div class="message">
-                            <div><img src="https://i.stack.imgur.com/1ZIkv.jpg?s=32&g=1"></div>
-                            <div>
-                                <p>It's easy!</p>
-                            </div>
-                            <div>08:40</div>
-                        </div>
-                        <div class="message">
-                            <div><img src="https://i.stack.imgur.com/1ZIkv.jpg?s=32&g=1"></div>
-                            <div>
-                                <p>It's easy!</p>
-                            </div>
-                            <div>08:40</div>
-                        </div>
-                        <div class="message">
-                            <div><img src="https://i.stack.imgur.com/1ZIkv.jpg?s=32&g=1"></div>
-                            <div>
-                                <p>It's easy!</p>
-                            </div>
-                            <div>08:40</div>
-                        </div>
-
-                        <div class="message user">
-                            <div></div>
-                            <div>
-                                <p>Really?</p>
-                            </div>
-                            <div>08:42</div>
-                        </div>
-                        <div class="message">
-                            <div><img src="https://i.stack.imgur.com/1ZIkv.jpg?s=32&g=1"></div>
-                            <div>
-                                <p>Well...</p>
-                            </div>
-                            <div>08:42</div>
-                        </div>
-                        <div class="message user">
-                            <div></div>
-                            <div>
-                                <p>Really?</p>
-                            </div>
-                            <div>08:42</div>
-                        </div>
-                        <div class="message">
-                            <div><img src="https://i.stack.imgur.com/1ZIkv.jpg?s=32&g=1"></div>
-                            <div>
-                                <p>It's easy!</p>
-                            </div>
-                            <div>08:40</div>
-                        </div>
-
-                        <div class="message user">
-                            <div></div>
-                            <div>
-                                <p>Really?</p>
-                            </div>
-                            <div>08:42</div>
-                        </div>
-                        <div class="message">
-                            <div><img src="https://i.stack.imgur.com/1ZIkv.jpg?s=32&g=1"></div>
-                            <div>
-                                <p>Well...</p>
-                            </div>
-                            <div>08:42</div>
-                        </div>
-                        <div class="message user">
-                            <div></div>
-                            <div>
-                                <p>Really?</p>
-                            </div>
-                            <div>08:42</div>
-                        </div>
-                        <div class="message">
-                            <div><img src="https://i.stack.imgur.com/1ZIkv.jpg?s=32&g=1"></div>
-                            <div>
-                                <p>It's easy!</p>
-                            </div>
-                            <div>08:40</div>
-                        </div>
-
-                        <div class="message user">
-                            <div></div>
-                            <div>
-                                <p>Really?</p>
-                            </div>
-                            <div>08:42</div>
-                        </div>
-                        <div class="message">
-                            <div><img src="https://i.stack.imgur.com/1ZIkv.jpg?s=32&g=1"></div>
-                            <div>
-                                <p>Well...</p>
-                            </div>
-                            <div>08:42</div>
-                        </div>
-                        <div class="message user">
-                            <div></div>
-                            <div>
-                                <p>Really?</p>
-                            </div>
-                            <div>08:42</div>
-                        </div>
-                    </div> 
-                    <div class="d-flex justify-content-center ">
-                        <div class="sub_div ">
-                            <div class="form-row">
-                                <div class="col-8 mb-3 ml-5">
-                                    <input type="text" class="form-control">
-                                </div>
-                                <div class="col mb-3 ml-5">
-                                    <button class="btn btn-primary" type="submit">Enviar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-                --}}
             </div>
         </div>
-    </div>
-    <script>
-        function openAndCloseNavOfPerfil() {
-            if ($navOpenPerfil == true) {
-                closeNavPerfil();
-            } else {
-                openNavPerfil();
+        <script>
+            function openAndCloseNavOfPerfil() {
+                if ($navOpenPerfil == true) {
+                    closeNavPerfil();
+                } else {
+                    openNavPerfil();
+                }
             }
-        }
-        var $navOpenPerfil = "";
+            var $navOpenPerfil = "";
 
-        function openNavPerfil() {
-            document.getElementById("mySidenavPerfil").style.width = "25%";
-            $navOpenPerfil = true;
-        }
-
-        function closeNavPerfil() {
-            document.getElementById("mySidenavPerfil").style.width = "0";
-            $navOpenPerfil = false;
-        }
-        //**Perfil**/
-
-
-
-        //**Contatos**/
-        function openAndCloseNavOfContatos() {
-            if ($navOpenContatos == true) {
-                closeNavContatos();
-            } else {
-                openNavContatos();
+            function openNavPerfil() {
+                document.getElementById("mySidenavPerfil").style.width = "25%";
+                $navOpenPerfil = true;
             }
-        }
-        var $navOpenContatos = "";
 
-        function openNavContatos() {
-            document.getElementById("mySidenavContatos").style.width = "25%";
-            $navOpenContatos = true;
-        }
+            function closeNavPerfil() {
+                document.getElementById("mySidenavPerfil").style.width = "0";
+                $navOpenPerfil = false;
+            }
+            //**Perfil**/
 
-        function closeNavContatos() {
-            document.getElementById("mySidenavContatos").style.width = "0";
-            $navOpenContatos = false;
-        }
-        
-        //**Contatos**/
-    </script>
-    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
-    </script>
 
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
-    integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
-  -->
+
+            //**Contatos**/
+            function openAndCloseNavOfContatos() {
+                if ($navOpenContatos == true) {
+                    closeNavContatos();
+                } else {
+                    openNavContatos();
+                }
+            }
+            var $navOpenContatos = "";
+
+            function openNavContatos() {
+                document.getElementById("mySidenavContatos").style.width = "25%";
+                $navOpenContatos = true;
+            }
+
+            function closeNavContatos() {
+                document.getElementById("mySidenavContatos").style.width = "0";
+                $navOpenContatos = false;
+            }
+
+
+$teste = $(".teste");
+            //**Contatos**/
+        </script>
+        <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
+        </script>
 </body>
 
 </html>

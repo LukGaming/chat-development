@@ -1,4 +1,23 @@
 <div>
+    <style>
+        div .message p::after {
+            display: inline-block;
+            margin-left: 0.255em;
+            vertical-align: 0.255em;
+            content: "";
+            border-top: 0.3em solid;
+            border-right: 0.3em solid transparent;
+            border-bottom: 0;
+            border-left: 0.3em solid transparent;
+            pointer-events: all;
+        }
+
+    </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+
+
 
     @if ($contato)
         <div class="d-flex justify-content-center">
@@ -15,7 +34,9 @@
                     <div class="message user">
                         <div></div>
                         <div>
-                            <p>{{ $mensagem->body }}</p>
+                            <p>{{ $mensagem->body }}
+
+                            </p>
                         </div>
                         <div> <?php
 echo Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $mensagem->created_at)->format('H:i');
@@ -52,11 +73,20 @@ echo Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $mensagem->created_at)->form
         </div>
 
     @endif
+
+
+
+
     <script>
+
+       
+
+        
+         
         window.addEventListener('nova_mensagem', event => {
             //alert("mensagem_recebida");
             //Notificar aqui na tela que foi recebida nova mensagem
-            $btnAlert_Nova_Mensagem = document.getElementById("btnAlert-Nova-Mensagem").style.position = "absolute";
+            //$btnAlert_Nova_Mensagem = document.getElementById("btnAlert-Nova-Mensagem").style.position = "absolute";
 
 
         });
@@ -71,110 +101,17 @@ echo Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $mensagem->created_at)->form
             $scroll = document.getElementById("scrollbar")
             $scroll.scrollTo(0, 9999);
         }
+        $messages = document.querySelectorAll(".message.user p")[0];
+        
+
+        //$btnConfig = window.getComputedStyle($messages, ':after')
+        //console.log($btnConfig)
+        //addEventListener("click", modifyText, false);
+
+        function clickToConfigMessage() {
+            alert("clicando");
+        }
     </script>
-
-    {{-- <div class="message">
-        <div><img src="https://i.stack.imgur.com/1ZIkv.jpg?s=32&g=1"></div>
-        <div>
-            <p>It's easy!</p>
-        </div>
-        <div>08:40</div>
-    </div>
-    <div class="message">
-        <div><img src="https://i.stack.imgur.com/1ZIkv.jpg?s=32&g=1"></div>
-        <div>
-            <p>It's easy!</p>
-        </div>
-        <div>08:40</div>
-    </div>
-    <div class="message">
-        <div><img src="https://i.stack.imgur.com/1ZIkv.jpg?s=32&g=1"></div>
-        <div>
-            <p>It's easy!</p>
-        </div>
-        <div>08:40</div>
-    </div>
-
-    <div class="message user">
-        <div></div>
-        <div>
-            <p>Really?</p>
-        </div>
-        <div>08:42</div>
-    </div>
-    <div class="message">
-        <div><img src="https://i.stack.imgur.com/1ZIkv.jpg?s=32&g=1"></div>
-        <div>
-            <p>Well...</p>
-        </div>
-        <div>08:42</div>
-    </div>
-    <div class="message user">
-        <div></div>
-        <div>
-            <p>Really?</p>
-        </div>
-        <div>08:42</div>
-    </div>
-    <div class="message">
-        <div><img src="https://i.stack.imgur.com/1ZIkv.jpg?s=32&g=1"></div>
-        <div>
-            <p>It's easy!</p>
-        </div>
-        <div>08:40</div>
-    </div>
-
-    <div class="message user">
-        <div></div>
-        <div>
-            <p>Really?</p>
-        </div>
-        <div>08:42</div>
-    </div>
-    <div class="message">
-        <div><img src="https://i.stack.imgur.com/1ZIkv.jpg?s=32&g=1"></div>
-        <div>
-            <p>Well...</p>
-        </div>
-        <div>08:42</div>
-    </div>
-    <div class="message user">
-        <div></div>
-        <div>
-            <p>Really?</p>
-        </div>
-        <div>08:42</div>
-    </div>
-    <div class="message">
-        <div><img src="https://i.stack.imgur.com/1ZIkv.jpg?s=32&g=1"></div>
-        <div>
-            <p>It's easy!</p>
-        </div>
-        <div>08:40</div>
-    </div>
-
-    <div class="message user">
-        <div></div>
-        <div>
-            <p>Really?</p>
-        </div>
-        <div>08:42</div>
-    </div>
-    <div class="message">
-        <div><img src="https://i.stack.imgur.com/1ZIkv.jpg?s=32&g=1"></div>
-        <div>
-            <p>Well...</p>
-        </div>
-        <div>08:42</div>
-    </div>
-    <div class="message user">
-        <div></div>
-        <div>
-            <p>Really?</p>
-        </div>
-        <div>08:42</div>
-    </div>
-</div> --}}
 
 
 </div>
