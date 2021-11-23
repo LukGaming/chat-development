@@ -236,7 +236,8 @@
                 <hr class="bg-light">
                 <div class="border border-dark overflow-auto bg-dark text-light rounded style-overflow"
                     style="height: 75vh;">
-                    <div class="list-group" style="margin-bottom: 5%; margin-right: 5px; ">
+                    @livewire('list-of-last-messages')
+                    {{-- {{-- <div class="list-group" style="margin-bottom: 5%; margin-right: 5px; ">
                         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
                             <div class="d-flex w-100 justify-content-between">
                                 <h6 class="mb-1">Paulo Antonio</h6>
@@ -256,7 +257,7 @@
                             <div class="border-bottom"></div>
                             <small>Donec id elit non mi porta.</small>
                         </a>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
             <div class="col-9 bg-success ">
