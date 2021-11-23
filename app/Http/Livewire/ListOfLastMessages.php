@@ -27,7 +27,8 @@ class ListOfLastMessages extends Component
         for ($i = 0; $i < count($contatos); $i++) {
             //Buscar as ultimas mensagens de cada contato deste usuário
             $mensagens = mensagen::where('sendFromUser', Auth::id())->where('sendToUser', $contatos[$i]->id)->orWhere('sendFromUser', $contatos[$i]->id)->where('sendToUser', Auth::id())->get();
-            if ($mensagens) {
+            if (count($mensagens)>0) {
+                $last_user_and_its_last_messages[$i]["horario"] = $mensagens[0]->created_at;
                 $last_user_and_its_last_messages[$i]["last_message"] = $mensagens[count($mensagens) - 1]->body;
                 $last_user_and_its_last_messages[$i]["sendFromUser"] = $mensagens[$i]->sendFromUser;
                 $last_user_and_its_last_messages[$i]["sendToUser"] = $mensagens[$i]->sendToUser;

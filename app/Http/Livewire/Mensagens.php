@@ -60,6 +60,5 @@ class Mensagens extends Component
             $this->messages = $novas_mensagens;
             $this->dispatchBrowserEvent('nova_mensagem', ['contato'=>$this->contato]);
         }
-        
     }
 }
