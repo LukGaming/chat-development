@@ -144,6 +144,7 @@
             <div class="col-3 bg-dark border-bottom">
                 <nav class="navbar navbar-expand-lg navbar-dark ">
                     <a class="navbar-brand" href="#">
+                       
                         @if ($dados_perfil->caminho_imagem_perfil)
                             @livewire('imagem-perfil',['imagem'=>$dados_perfil->caminho_imagem_perfil])
                         @else

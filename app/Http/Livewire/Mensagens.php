@@ -2,9 +2,13 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Contato;
 use App\Models\mensagen;
+use App\Models\perfilFill;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+
 
 class Mensagens extends Component
 {
@@ -22,14 +26,27 @@ class Mensagens extends Component
     }
     public function conversaIniciada($contato)
     {
-        $this->contato["nome_contato"] = $contato["nome_contato"];
-        $this->contato["email"] = $contato["email"];
-        $this->contato["owner_user"] = $contato["owner_user"];
-        $this->contato["imagem_perfil"] = $contato["caminho_imagem_perfil"];
-        $this->messages = mensagen::where('sendFromUser', Auth::id())->where('sendToUser', $this->contato["owner_user"])->orWhere('sendToUser', Auth::id())->where('sendFromUser', $this->contato["owner_user"])
+        if (gettype($contato) == "array") {
+            $this->contato["nome_contato"] = $contato["nome_contato"];
+            $this->contato["email"] = $contato["email"];
+            $this->contato["owner_user"] = $contato["owner_user"];
+            $this->contato["imagem_perfil"] = $contato["caminho_imagem_perfil"];
+            $this->messages = mensagen::where('sendFromUser', Auth::id())->where('sendToUser', $this->contato["owner_user"])->orWhere('sendToUser', Auth::id())->where('sendFromUser', $this->contato["owner_user"])
             ->get();
-            $this->dispatchBrowserEvent('iniciando_conversa');
-            
+        }
+        if (gettype($contato == "int")) {
+            $dados_contato = Contato::where('id', $contato)->first();
+            $this->contato["nome_contato"] = $dados_contato->nome_contato;
+            $this->contato["email"] = $dados_contato->email;
+            $owner_user = User::where('email', $dados_contato->email)->first();
+            $imagem_perfil = perfilFill::where('user_id', $owner_user->id)->first();
+            $this->contato["owner_user"] = $owner_user->id;
+            $this->contato["imagem_perfil"] =  $imagem_perfil->caminho_imagem_perfil;
+            $this->messages = mensagen::where('sendFromUser', Auth::id())->where('sendToUser',$contato)->orWhere('sendToUser', Auth::id())->where('sendFromUser', $contato)
+            ->get();
+        }
+        $this->dispatchBrowserEvent('iniciando_conversa');
+
         //dd($this->messages);
     }
     public function sendMessage()
@@ -50,15 +67,16 @@ class Mensagens extends Component
     {
         $this->messages = mensagen::where('sendFromUser', Auth::id())->where('sendToUser', $this->contato["owner_user"])->orWhere('sendToUser', Auth::id())->where('sendFromUser', $this->contato["owner_user"])
             ->get();
-            $this->dispatchBrowserEvent('mensagem_enviada');
+        $this->dispatchBrowserEvent('mensagem_enviada');
+        $this->emit("atualizar_last_messages");
     }
     public function atualizando_mensagens()
     {
         $novas_mensagens = mensagen::where('sendFromUser', Auth::id())->where('sendToUser', $this->contato["owner_user"])->orWhere('sendToUser', Auth::id())->where('sendFromUser', $this->contato["owner_user"])
             ->get();
-        if(count($novas_mensagens) != count($this->messages)){
+        if (count($novas_mensagens) != count($this->messages)) {
             $this->messages = $novas_mensagens;
-            $this->dispatchBrowserEvent('nova_mensagem', ['contato'=>$this->contato]);
+            $this->dispatchBrowserEvent('nova_mensagem', ['contato' => $this->contato]);
         }
     }
 }

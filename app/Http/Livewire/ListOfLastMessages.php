@@ -12,11 +12,11 @@ use Livewire\Component;
 
 class ListOfLastMessages extends Component
 {
-
+    protected $listeners = ['atualizar_last_messages'=>'$refresh'];
     public function render()
     {
         $last_user_and_its_last_messages = $this->lastMessages();
-        return view('livewire.list-of-last-messages', ['last_user_and_its_last_messages'=>$last_user_and_its_last_messages]);
+        return view('livewire.list-of-last-messages', ['last_user_and_its_last_messages' => $last_user_and_its_last_messages]);
     }
     public function lastMessages()
     {
@@ -26,8 +26,10 @@ class ListOfLastMessages extends Component
         $last_user_and_its_last_messages = [];
         for ($i = 0; $i < count($contatos); $i++) {
             //Buscar as ultimas mensagens de cada contato deste usuário
-            $mensagens = mensagen::where('sendFromUser', Auth::id())->where('sendToUser', $contatos[$i]->id)->orWhere('sendFromUser', $contatos[$i]->id)->where('sendToUser', Auth::id())->get();
-            if (count($mensagens)>0) {
+            $mensagens = mensagen::where('sendFromUser', Auth::id())->where('sendToUser', $contatos[$i]->id)->orderBy('created_at','desc')->orWhere('sendFromUser', $contatos[$i]->id)->orderBy('created_at','desc')->where('sendToUser', Auth::id())->orderBy('created_at','desc')->get();
+            // $last_messages = mensagen::where('sendFromUser', Auth::id())->orderBy('created_at','desc')->first();
+            // dd($last_messages);
+            if (count($mensagens) > 0) {
                 $last_user_and_its_last_messages[$i]["horario"] = $mensagens[0]->created_at;
                 $last_user_and_its_last_messages[$i]["last_message"] = $mensagens[count($mensagens) - 1]->body;
                 $last_user_and_its_last_messages[$i]["sendFromUser"] = $mensagens[$i]->sendFromUser;
@@ -42,10 +44,13 @@ class ListOfLastMessages extends Component
                 $id_contato = $nome_contato[0]->id;
                 $last_user_and_its_last_messages[$i]["email"] = $email_contato;
                 $last_user_and_its_last_messages[$i]["id_contato_user_id"] = $id_contato;
-                $nome_contato = Contato::where('email', $email_contato)->where('user_id' ,Auth::id())->get();
+                $nome_contato = Contato::where('email', $email_contato)->where('user_id', Auth::id())->get();
                 $last_user_and_its_last_messages[$i]["nome_contato"] = $nome_contato[0]->nome_contato;
             }
         }
         return $last_user_and_its_last_messages;
+    }
+    public function mensagem_iniciada($contato){
+        $this->emit('conversaIniciada', $contato);
     }
 }

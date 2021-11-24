@@ -14,11 +14,6 @@
 
     </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-
-
-
-
     @if ($contato)
         <div class="d-flex justify-content-center">
             <div class="alert-nova-message" id="btnAlert-Nova-Mensagem" style="top: 0; z-index: 1; "
@@ -71,18 +66,8 @@ echo Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $mensagem->created_at)->form
                 </div>
             </div>
         </div>
-
     @endif
-
-
-
-
     <script>
-
-       
-
-        
-         
         window.addEventListener('nova_mensagem', event => {
             //alert("mensagem_recebida");
             //Notificar aqui na tela que foi recebida nova mensagem
@@ -112,6 +97,4 @@ echo Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $mensagem->created_at)->form
             alert("clicando");
         }
     </script>
-
-
 </div>

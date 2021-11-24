@@ -2,6 +2,9 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Contato;
+use App\Models\perfilFill;
+use App\Models\User;
 use Livewire\Component;
 
 class PerfilUserMensagem extends Component
@@ -14,9 +17,21 @@ class PerfilUserMensagem extends Component
         return view('livewire.perfil-user-mensagem');
     }
     public function conversaIniciada($contato){
-       $this->contato["nome_contato"] = $contato["nome_contato"];
-       $this->contato["email"] = $contato["email"];
-       $this->contato["owner_user"] = $contato["owner_user"];
-       $this->contato["imagem_perfil"] = $contato["caminho_imagem_perfil"];
+        if (gettype($contato) == "array") {
+            $this->contato["nome_contato"] = $contato["nome_contato"];
+            $this->contato["email"] = $contato["email"];
+            $this->contato["owner_user"] = $contato["owner_user"];
+            $this->contato["imagem_perfil"] = $contato["caminho_imagem_perfil"];
+            
+        }
+        if (gettype($contato == "int")) {
+            $dados_contato = Contato::where('id', $contato)->first();
+            $this->contato["nome_contato"] = $dados_contato->nome_contato;
+            $this->contato["email"] = $dados_contato->email;
+            $owner_user = User::where('email', $dados_contato->email)->first();
+            $imagem_perfil = perfilFill::where('user_id', $owner_user->id)->first();
+            $this->contato["owner_user"] = $owner_user->id;
+            $this->contato["imagem_perfil"] =  $imagem_perfil->caminho_imagem_perfil;
+        }
     }
 }
