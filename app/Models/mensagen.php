@@ -12,6 +12,7 @@ class mensagen extends Model
         "id",
         "body",
         "sendFromUser",
-        "sendToUser"
+        "sendToUser",
+        "read"
     ];
 }

@@ -33,6 +33,8 @@ class Mensagens extends Component
             $this->contato["imagem_perfil"] = $contato["caminho_imagem_perfil"];
             $this->messages = mensagen::where('sendFromUser', Auth::id())->where('sendToUser', $this->contato["owner_user"])->orWhere('sendToUser', Auth::id())->where('sendFromUser', $this->contato["owner_user"])
             ->get();
+            //Como o campo de mensagens será aberto, ir no banco de dados e ler todas as mensagens deste usuário
+            mensagen::where('sendFromUser', $this->contato["owner_user"])->where('sendToUser', Auth::id())->update(["read"=>1]);
         }
         if (gettype($contato == "int")) {
             $dados_contato = Contato::where('id', $contato)->first();
@@ -44,6 +46,7 @@ class Mensagens extends Component
             $this->contato["imagem_perfil"] =  $imagem_perfil->caminho_imagem_perfil;
             $this->messages = mensagen::where('sendFromUser', Auth::id())->where('sendToUser',$contato)->orWhere('sendToUser', Auth::id())->where('sendFromUser', $contato)
             ->get();
+            mensagen::where('sendFromUser', $contato)->where('sendToUser', Auth::id())->update(["read"=>1]);
         }
         $this->dispatchBrowserEvent('iniciando_conversa');
 

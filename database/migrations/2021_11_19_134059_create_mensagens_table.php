@@ -19,6 +19,7 @@ class CreateMensagensTable extends Migration
             $table->longText("body");
             $table->integer("sendFromUser");
             $table->integer("sendToUser");
+            $table->integer("read")->default(0);
         });
     }
 
