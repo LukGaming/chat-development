@@ -87,6 +87,9 @@
         text-align: center;
         color: white;
     }
+    .bg-new-dark{
+        background-color: #111;
+    }
 
 
     .centered {
@@ -177,7 +180,7 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <div class="border border-dark overflow-auto bg-dark text-light rounded style-overflow"
+                                                    <div class="  overflow-auto bg-dark text-light rounded style-overflow"
                                                         style="height: 50vh;">
                                                         @livewire('listade-contatos')
                                                     </div>
@@ -238,27 +241,7 @@
                 <div class="border border-dark overflow-auto bg-dark text-light rounded style-overflow"
                     style="height: 75vh;">
                     @livewire('list-of-last-messages')
-                    {{-- {{-- <div class="list-group" style="margin-bottom: 5%; margin-right: 5px; ">
-                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h6 class="mb-1">Paulo Antonio</h6>
-                                <small><span class="badge badge-primary badge-pill bg-dark">14</span></small>
-                            </div>
-                            <div class="border-bottom"></div>
-                            <small>Donec id elit non mi porta.</small>
-                        </a>
-                    </div>
-
-                    <div class="list-group" style="margin-bottom: 5%; margin-right: 5px;">
-                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h6 class="mb-1">Paulo Antonio</h6>
-                                <small><span class="badge badge-primary badge-pill bg-dark">14</span></small>
-                            </div>
-                            <div class="border-bottom"></div>
-                            <small>Donec id elit non mi porta.</small>
-                        </a>
-                    </div> --}}
+                    
                 </div>
             </div>
             <div class="col-9 bg-success ">

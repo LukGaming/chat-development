@@ -6,7 +6,7 @@
             </div>
             <div class="text-inside-sidebar">Seus Contatos</div>
             <div class="d-flex justify-content-center">
-                <div class="border border-dark overflow-auto bg-dark text-light rounded style-overflow" style="height: 75vh;">
+                <div class=" overflow-auto  text-light rounded style-overflow" style="height: 75vh; background-color: #111">
                 @foreach ($contatos as $contato)
                     <div class="list-group " style="margin: 5px;" wire:click="BotaoClicado({{ $contato }})">
                         <a href="#"
