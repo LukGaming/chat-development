@@ -64,6 +64,7 @@ class ListOfLastMessages extends Component
         }
         // dd($last_user_and_its_last_messages[0]["horario"]);
         //dd($last_user_and_its_last_messages);
+        
         return $last_user_and_its_last_messages;
     }
     public function mensagem_iniciada($contato)

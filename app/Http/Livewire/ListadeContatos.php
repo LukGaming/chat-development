@@ -17,15 +17,6 @@ class ListadeContatos extends Component
     }
     public function mostraListaDeContatos()
     {
-        // //Buscar Todos os contatos;
-        // $contatos = Contato::where('user_id', Auth::id())->get();
-        // //Buscando as imagens desses contatos
-        // for($i=0; $i<count($contatos); $i++){
-
-        // }
-        // $img = perfilFill::where('user_id', $contatos[$i]->id);
-
-
         $contatos =  Contato::where('user_id', Auth::id())->get();
         //Fazer relacionamento do contato para o usuario
         for ($i = 0; $i < count($contatos); $i++) {
@@ -34,8 +25,7 @@ class ListadeContatos extends Component
             if ($contatos[$i]["owner_user"]) {
                 $contatos[$i]["owner_user"] = User::where("email", $contatos[$i]->email)->first()->id;
                 $contatos[$i]["caminho_imagem_perfil"] = perfilFill::where("user_id", $contatos[$i]["owner_user"])->first()->caminho_imagem_perfil;
-            }
-            else{
+            } else {
                 $contatos[$i]["owner_user"] = null;
                 $contatos[$i]["caminho_imagem_perfil"] = null;
             }

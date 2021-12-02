@@ -80,6 +80,9 @@ class Mensagens extends Component
         if (count($novas_mensagens) != count($this->messages)) {
             $this->messages = $novas_mensagens;
             $this->dispatchBrowserEvent('nova_mensagem', ['contato' => $this->contato]);
+            //dd("mensagem lida");
+            
         }
+        
     }
 }
