@@ -37,7 +37,9 @@ class Mensagens extends Component
             mensagen::where('sendFromUser', $this->contato["owner_user"])->where('sendToUser', Auth::id())->update(["read"=>1]);
         }
         if (gettype($contato == "int")) {
-            $dados_contato = Contato::where('id', $contato)->first();
+           //Buscando dados deste contato no banco de dados
+            $dados_contato = Contato::where('user_id', $contato)->first();
+            dd($dados_contato);
             $this->contato["nome_contato"] = $dados_contato->nome_contato;
             $this->contato["email"] = $dados_contato->email;
             $owner_user = User::where('email', $dados_contato->email)->first();

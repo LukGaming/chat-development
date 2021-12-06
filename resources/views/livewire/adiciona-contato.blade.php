@@ -42,6 +42,19 @@
         </div>
     </div>
     <script>
+        window.addEventListener('adicionando_a_si_proprio', event => {
+            $("#erro_email").html("Voce não pode adicionar a sí mesmo a um contato");
+            $("#erro_email").show();
+        })
+        window.addEventListener('contato_nao_existe', event => {
+            $("#erro_email").html("Não existe um contato com este email");
+            $("#erro_email").show();
+        })
+
+        window.addEventListener('contato_ja_adicionado', event => {
+            $("#erro_email").html("Voce já adicionou este contato!");
+            $("#erro_email").show();
+        })
         window.addEventListener('erro_nome', event => {
             $("#erro_nome").html("Nome Invalido!");
             $("#erro_nome").show();
