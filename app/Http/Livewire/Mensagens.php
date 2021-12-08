@@ -26,29 +26,33 @@ class Mensagens extends Component
     }
     public function conversaIniciada($contato)
     {
+
         if (gettype($contato) == "array") {
             $this->contato["nome_contato"] = $contato["nome_contato"];
             $this->contato["email"] = $contato["email"];
             $this->contato["owner_user"] = $contato["owner_user"];
             $this->contato["imagem_perfil"] = $contato["caminho_imagem_perfil"];
             $this->messages = mensagen::where('sendFromUser', Auth::id())->where('sendToUser', $this->contato["owner_user"])->orWhere('sendToUser', Auth::id())->where('sendFromUser', $this->contato["owner_user"])
-            ->get();
+                ->get();
             //Como o campo de mensagens será aberto, ir no banco de dados e ler todas as mensagens deste usuário
-            mensagen::where('sendFromUser', $this->contato["owner_user"])->where('sendToUser', Auth::id())->update(["read"=>1]);
+            mensagen::where('sendFromUser', $this->contato["owner_user"])->where('sendToUser', Auth::id())->update(["read" => 1]);
         }
         if (gettype($contato == "int")) {
-           //Buscando dados deste contato no banco de dados
+            //Buscando dados deste contato no banco de dados
             $dados_contato = Contato::where('user_id', $contato)->first();
-            dd($dados_contato);
+
+
             $this->contato["nome_contato"] = $dados_contato->nome_contato;
             $this->contato["email"] = $dados_contato->email;
             $owner_user = User::where('email', $dados_contato->email)->first();
             $imagem_perfil = perfilFill::where('user_id', $owner_user->id)->first();
             $this->contato["owner_user"] = $owner_user->id;
             $this->contato["imagem_perfil"] =  $imagem_perfil->caminho_imagem_perfil;
-            $this->messages = mensagen::where('sendFromUser', Auth::id())->where('sendToUser',$contato)->orWhere('sendToUser', Auth::id())->where('sendFromUser', $contato)
-            ->get();
-            mensagen::where('sendFromUser', $contato)->where('sendToUser', Auth::id())->update(["read"=>1]);
+            $this->messages = mensagen::where('sendFromUser', Auth::id())->where('sendToUser', $contato)->orWhere('sendToUser', Auth::id())->where('sendFromUser', $contato)
+
+                ->get();
+
+            mensagen::where('sendFromUser', $contato)->where('sendToUser', Auth::id())->update(["read" => 1]);
         }
         $this->dispatchBrowserEvent('iniciando_conversa');
 
@@ -79,12 +83,10 @@ class Mensagens extends Component
     {
         $novas_mensagens = mensagen::where('sendFromUser', Auth::id())->where('sendToUser', $this->contato["owner_user"])->orWhere('sendToUser', Auth::id())->where('sendFromUser', $this->contato["owner_user"])
             ->get();
+
         if (count($novas_mensagens) != count($this->messages)) {
             $this->messages = $novas_mensagens;
             $this->dispatchBrowserEvent('nova_mensagem', ['contato' => $this->contato]);
-            //dd("mensagem lida");
-            
         }
-        
     }
 }

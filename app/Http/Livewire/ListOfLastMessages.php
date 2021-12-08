@@ -24,6 +24,7 @@ class ListOfLastMessages extends Component
 
         //Buscar Os contatos deste usuário
         $contatos =  Contato::where('user_id', Auth::id())->get();
+       
         //Buscar as  mensagens entre este contato e o usuário logado
         $last_user_and_its_last_messages = [];
 
@@ -52,10 +53,12 @@ class ListOfLastMessages extends Component
                 $last_user_and_its_last_messages[$i]["user_id"] = $perfilFill->user_id;
                 //Buscando nome deste usuário, nome que eu coloquei neste usuário
                 $nome_contato = User::where('id', $perfilFill->user_id)->first();
+                // dd($perfilFill);
                 $email_contato = $nome_contato->email;
                 $last_user_and_its_last_messages[$i]["email"] = $email_contato;
                 $last_user_and_its_last_messages[$i]["id_contato_user_id"] = $id_contato;
-                $last_user_and_its_last_messages[$i]["nome_contato"] = $nome_contato->name;
+                
+                $last_user_and_its_last_messages[$i]["nome_contato"] = $perfilFill->nome;
                 $last_user_and_its_last_messages[$i]["not_read"] = count($mensagens_nao_lidas);
             }
         }
@@ -78,6 +81,7 @@ class ListOfLastMessages extends Component
     }
     public function mensagem_iniciada($contato)
     {
+        // dd($contato);
         $this->emit('conversaIniciada', $contato);
     }
 }
