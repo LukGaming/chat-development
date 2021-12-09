@@ -28,6 +28,7 @@ class Mensagens extends Component
     {
 
         if (gettype($contato) == "array") {
+            //dd($contato);
             $this->contato["nome_contato"] = $contato["nome_contato"];
             $this->contato["email"] = $contato["email"];
             $this->contato["owner_user"] = $contato["owner_user"];
@@ -37,11 +38,11 @@ class Mensagens extends Component
             //Como o campo de mensagens será aberto, ir no banco de dados e ler todas as mensagens deste usuário
             mensagen::where('sendFromUser', $this->contato["owner_user"])->where('sendToUser', Auth::id())->update(["read" => 1]);
         }
-        if (gettype($contato == "int")) {
+        if (gettype($contato) == "integer") {
+
             //Buscando dados deste contato no banco de dados
-            $dados_contato = Contato::where('user_id', $contato)->first();
-
-
+            $email_contato = User::where('id', $contato)->first()->email;
+            $dados_contato = Contato::where('email', $email_contato)->first();
             $this->contato["nome_contato"] = $dados_contato->nome_contato;
             $this->contato["email"] = $dados_contato->email;
             $owner_user = User::where('email', $dados_contato->email)->first();
