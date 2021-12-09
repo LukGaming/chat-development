@@ -36,7 +36,7 @@ class Mensagens extends Component
             $this->messages = mensagen::where('sendFromUser', Auth::id())->where('sendToUser', $this->contato["owner_user"])->orWhere('sendToUser', Auth::id())->where('sendFromUser', $this->contato["owner_user"])
                 ->get();
             //Como o campo de mensagens será aberto, ir no banco de dados e ler todas as mensagens deste usuário
-            mensagen::where('sendFromUser', $this->contato["owner_user"])->where('sendToUser', Auth::id())->update(["read" => 1]);
+            $this->readingLastMessages($this->contato["owner_user"]);
         }
         if (gettype($contato) == "integer") {
 
@@ -53,7 +53,7 @@ class Mensagens extends Component
 
                 ->get();
 
-            mensagen::where('sendFromUser', $contato)->where('sendToUser', Auth::id())->update(["read" => 1]);
+            $this->readingLastMessages($contato);
         }
         $this->dispatchBrowserEvent('iniciando_conversa');
 
@@ -84,10 +84,14 @@ class Mensagens extends Component
     {
         $novas_mensagens = mensagen::where('sendFromUser', Auth::id())->where('sendToUser', $this->contato["owner_user"])->orWhere('sendToUser', Auth::id())->where('sendFromUser', $this->contato["owner_user"])
             ->get();
-
+            
         if (count($novas_mensagens) != count($this->messages)) {
             $this->messages = $novas_mensagens;
+            $this->readingLastMessages($this->contato["owner_user"]);
             $this->dispatchBrowserEvent('nova_mensagem', ['contato' => $this->contato]);
         }
+    }
+    public function readingLastMessages($contato){
+        mensagen::where('sendFromUser', $contato)->where('sendToUser', Auth::id())->update(["read" => 1]);
     }
 }
