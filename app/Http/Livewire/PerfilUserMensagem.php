@@ -7,6 +7,7 @@ use App\Models\perfilFill;
 use App\Models\User;
 use Livewire\Component;
 
+
 class PerfilUserMensagem extends Component
 {
 
@@ -41,5 +42,8 @@ class PerfilUserMensagem extends Component
             $this->contato["owner_user"] = $owner_user->id;
             $this->contato["imagem_perfil"] =  $imagem_perfil->caminho_imagem_perfil;
         }
+    }
+    public function lastSeen(){
+        
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Contato;
 use App\Models\User;
+use App\Providers\LastSeenProvider;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -15,6 +16,7 @@ class AdicionaContato extends Component
     public $nome_contato;
     public function render()
     {
+        LastSeenProvider::lastSeenUser(Auth::id());
         return view('livewire.adiciona-contato');
     }
     public function salvarContato()

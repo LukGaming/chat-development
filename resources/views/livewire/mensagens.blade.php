@@ -65,10 +65,7 @@
     <script>
         var height = $("#scrollbar-mensagens").scrollTop();
         window.addEventListener('nova_mensagem', event => {
-            console.log(event.detail);
             $(".alert-nova-message").css('visibility', 'visible');
-            
-
         });
         window.addEventListener('mensagem_enviada', event => {
             scrollDownWhenMessageSend();
@@ -82,16 +79,8 @@
             $scroll.scrollTo(0, 9999);
             var height = $("#scrollbar-mensagens").scrollTop();
             $(".alert-nova-message").css("visibility", "hidden");
-
-
         }
         $messages = document.querySelectorAll(".message.user p")[0];
-
-
-        //$btnConfig = window.getComputedStyle($messages, ':after')
-        //console.log($btnConfig)
-        //addEventListener("click", modifyText, false);
-
         function clickToConfigMessage() {
             alert("clicando");
         }
