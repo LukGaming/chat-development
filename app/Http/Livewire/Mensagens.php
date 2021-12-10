@@ -21,12 +21,12 @@ class Mensagens extends Component
     {
         //Pegando as mensagens que fiz com esse usuário
 
-
+        
         return view('livewire.mensagens');
     }
     public function conversaIniciada($contato)
     {
-
+        $this->dispatchBrowserEvent('meu_id', ["user_id" => Auth::id()]);
         if (gettype($contato) == "array") {
             //dd($contato);
             $this->contato["nome_contato"] = $contato["nome_contato"];
@@ -84,14 +84,15 @@ class Mensagens extends Component
     {
         $novas_mensagens = mensagen::where('sendFromUser', Auth::id())->where('sendToUser', $this->contato["owner_user"])->orWhere('sendToUser', Auth::id())->where('sendFromUser', $this->contato["owner_user"])
             ->get();
-            
+
         if (count($novas_mensagens) != count($this->messages)) {
             $this->messages = $novas_mensagens;
             $this->readingLastMessages($this->contato["owner_user"]);
-            $this->dispatchBrowserEvent('nova_mensagem', ['contato' => $this->contato]);
+            $this->dispatchBrowserEvent('nova_mensagem',  ['who_send' => $this->contato['owner_user']]);
         }
     }
-    public function readingLastMessages($contato){
+    public function readingLastMessages($contato)
+    {
         mensagen::where('sendFromUser', $contato)->where('sendToUser', Auth::id())->update(["read" => 1]);
     }
 }

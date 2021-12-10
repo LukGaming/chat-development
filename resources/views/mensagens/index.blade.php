@@ -246,7 +246,13 @@
             </div>
             <div class="col-9 bg-success ">
                 <div class="border border-dark overflow-auto bg-dark text-light rounded style-overflow mt-3"
-                    style="height: 75vh;" id="scrollbar">
+                    style="height: 75vh;" id="scrollbar-mensagens">
+                    <div class="d-flex justify-content-center">
+                        <div class="alert-nova-message" id="btnAlert-Nova-Mensagem" style="top: 0; z-index: 1; position: absolute; visibility: hidden;"
+                            onclick="scrollDownWhenMessageSend()">
+                            <strong>Voce tem Novas Mensagens!</strong>
+                        </div>
+                    </div>
                     @livewire('mensagens')
                 </div>
             </div>
