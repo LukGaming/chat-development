@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\perfilFill;
+use App\Providers\LastSeenProvider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
@@ -28,6 +29,7 @@ class ChangePhotoPerfil extends Component
 
     public function updatedPhoto()
     {
+        LastSeenProvider::lastSeenUser(Auth::id());
         $img = ImageManagerStatic::make($this->photo)->encode('jpg');
         $name = Str::random() . '.jpg';
         Storage::disk('public')->put($name , $img);

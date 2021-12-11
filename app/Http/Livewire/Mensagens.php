@@ -6,6 +6,7 @@ use App\Models\Contato;
 use App\Models\mensagen;
 use App\Models\perfilFill;
 use App\Models\User;
+use App\Providers\LastSeenProvider;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -26,6 +27,7 @@ class Mensagens extends Component
     }
     public function conversaIniciada($contato)
     {
+        LastSeenProvider::lastSeenUser(Auth::id());
         $this->dispatchBrowserEvent('meu_id', ["user_id" => Auth::id()]);
         if (gettype($contato) == "array") {
             //dd($contato);
@@ -61,6 +63,7 @@ class Mensagens extends Component
     }
     public function sendMessage()
     {
+        LastSeenProvider::lastSeenUser(Auth::id());
         if ($this->inputMessage == "") {
             return;
         } else {
@@ -93,6 +96,7 @@ class Mensagens extends Component
     }
     public function readingLastMessages($contato)
     {
+        LastSeenProvider::lastSeenUser(Auth::id());
         mensagen::where('sendFromUser', $contato)->where('sendToUser', Auth::id())->update(["read" => 1]);
     }
 }

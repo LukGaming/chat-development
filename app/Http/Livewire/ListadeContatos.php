@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Contato;
 use App\Models\perfilFill;
 use App\Models\User;
+use App\Providers\LastSeenProvider;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -17,6 +18,7 @@ class ListadeContatos extends Component
     }
     public function mostraListaDeContatos()
     {
+        LastSeenProvider::lastSeenUser(Auth::id());
         $contatos =  Contato::where('user_id', Auth::id())->get();
         //Fazer relacionamento do contato para o usuario
         for ($i = 0; $i < count($contatos); $i++) {

@@ -28,6 +28,6 @@ class LastSeenProvider extends ServiceProvider
         //
     }
     public static  function lastSeenUser($user){
-        last_seen::where('user_id', $user)->update(['updated_at'=>Carbon::now()]);
+       last_seen::where('user_id', $user)->update(['updated_at'=>Carbon::now()]);
     }
 }

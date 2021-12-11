@@ -16,11 +16,12 @@ class AdicionaContato extends Component
     public $nome_contato;
     public function render()
     {
-        LastSeenProvider::lastSeenUser(Auth::id());
+        
         return view('livewire.adiciona-contato');
     }
     public function salvarContato()
     {
+        LastSeenProvider::lastSeenUser(Auth::id());
         //Se os campos de email ficarem vazios, chamar a função erro email
         if (gettype($this->email) == "NULL" || $this->email == "") {
             $this->erroEmail();

@@ -5,9 +5,11 @@
                 <img src="{{ asset('storage/' . $contato['imagem_perfil']) }}"
                     class="imagem_perfil rounded rounded-circle w-50  ">
             </div>
-            <div class="col" style="margin: auto" wire:poll.5000ms="lastSeen()">
+            <div class="col" style="margin: auto" >
                 <div  class="text-white"> {{ $contato['nome_contato'] }}</div>
-                <div  class="text-white" > Visto Por Ultimo: 10:17</div>
+                
+                @livewire('last-seen', ['user_id' => $contato['owner_user']])
+                
             </div>
         </div>
     @endif
