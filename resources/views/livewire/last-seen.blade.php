@@ -1,7 +1,9 @@
-
-@if ($last_seen_in == 'Online')
-    Online
-    @else 
-    <div class="text-white"> Visto Por Ultimo: {{ $last_seen_in }}</div>
-@endif
-
+<div wire:poll.20000ms=>
+    @if ($last_seen_in == 'Online')
+        <div class="text-white">
+            Online
+        </div>
+    @else
+        <div class="text-white"> {{ $last_seen_in }}</div>
+    @endif
+</div>
