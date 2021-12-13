@@ -3,7 +3,7 @@
         @foreach ($last_user_and_its_last_messages as $user)
 
             <div class="list-group" style="margin-bottom: 5%; margin-right: 5px; " wire:poll='lastMessages()'
-                wire:click="mensagem_iniciada({{ $user['id_contato_user_id'] }})">
+                wire:click="mensagem_iniciada({{ $user['id_contato_user_id'] }})" wire:click= "$emitTo('LastSeen', 'last_seen')">
                 <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
                     <div class="d-flex w-100 justify-content-between">
                         <h6 class="mb-1">{{ $user['nome_contato'] }}</h6>

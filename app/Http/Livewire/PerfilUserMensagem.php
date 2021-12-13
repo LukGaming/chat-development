@@ -21,20 +21,14 @@ class PerfilUserMensagem extends Component
     {
         
         if (gettype($contato) == "array") {
-            
-            
             $this->contato["nome_contato"] = $contato["nome_contato"];
             $this->contato["email"] = $contato["email"];
             $this->contato["owner_user"] = $contato["owner_user"];
             $this->contato["imagem_perfil"] = $contato["caminho_imagem_perfil"];
         }
         if (gettype($contato) == "integer") {
-
-            //Preciso achar o id exato do contato
-            //Pegando email relacionado a este contato
            $email_contato = User::where('id', $contato)->first()->email;
            $dados_contato = Contato::where('email', $email_contato)->first();
-           
             $this->contato["nome_contato"] = $dados_contato->nome_contato;
             $this->contato["email"] = $dados_contato->email;
             $owner_user = User::where('email', $dados_contato->email)->first();
@@ -42,8 +36,5 @@ class PerfilUserMensagem extends Component
             $this->contato["owner_user"] = $owner_user->id;
             $this->contato["imagem_perfil"] =  $imagem_perfil->caminho_imagem_perfil;
         }
-    }
-    public function lastSeen(){
-        
     }
 }
