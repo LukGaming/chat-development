@@ -19,7 +19,7 @@ class PerfilUserMensagem extends Component
     }
     public function conversaIniciada($contato)
     {
-        
+        $this->emit('atualiza_last_seen', $contato);
         if (gettype($contato) == "array") {
             $this->contato["nome_contato"] = $contato["nome_contato"];
             $this->contato["email"] = $contato["email"];
