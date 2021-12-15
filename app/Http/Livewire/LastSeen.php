@@ -14,13 +14,13 @@ class LastSeen extends Component
    protected $listeners = ['atualiza_last_seen' => 'atualiza_last_seen_when_change_contato'];
    public function render()
    {
-
+      
       $this->last_seen();
       return view('livewire.last-seen');
    }
    public function watchInDataBaseWhenWasTheLastSeen()
    {
-     
+     //dd($this->user_id);
       return last_seen::where('user_id', $this->user_id)->first();
    }
    public function atualiza_last_seen_when_change_contato($contato)
@@ -30,17 +30,14 @@ class LastSeen extends Component
    public function last_seen()
    {
       $last_seen = $this->watchInDataBaseWhenWasTheLastSeen()->updated_at;
-      
       $interval = Carbon::parse($last_seen)->diffInSeconds(Carbon::now());
       $this->last_seen_in = $this->whenWasLastSeen($interval, $last_seen);
    }
    public function whenWasLastSeen($interval, $last_seen)
    {
-
       $hoje = Carbon::today();
       if ($last_seen->diffInDays() < 7) {
          $horario = Carbon::createFromFormat('Y-m-d H:i:s', $last_seen)->format('H:i');
-
          if ($last_seen->isYesterday()) {
             return "Visto por Ultimo Ontem às " .  $horario;
          } else if ($last_seen->isToday()) {

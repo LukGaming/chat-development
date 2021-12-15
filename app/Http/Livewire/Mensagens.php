@@ -58,8 +58,6 @@ class Mensagens extends Component
             $this->readingLastMessages($contato);
         }
         $this->dispatchBrowserEvent('iniciando_conversa');
-
-        //dd($this->messages);
     }
     public function sendMessage()
     {

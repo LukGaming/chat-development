@@ -6,20 +6,21 @@
                 wire:click="mensagem_iniciada({{ $user['id_contato_user_id'] }})" wire:click= "$emitTo('LastSeen', 'last_seen')">
                 <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
                     <div class="d-flex w-100 justify-content-between">
-                        <h6 class="mb-1">{{ $user['nome_contato'] }}</h6>
+                        <h4 style="font-weight: 300; font: inherit" class="mb-1" data-toggle="tooltip" data-placement="top" title="{{ $user['nome_contato'] }}">{{ $user['nome_contato'] }}</h6>
+                        
                         @if($user["not_read"]>0)
                         <small><span class="badge badge-primary badge-pill bg-dark">{{$user["not_read"]}} </span></small>
                         @endif
                     </div>
-                    <div class="border-bottom"></div>
-                    <div class="d-flex justify-content-between">
+                   
+                    <div class="d-flex justify-content-between" data-toggle="tooltip" data-placement="top" title="{{ $user['last_message'] }}">
                         <small>
                             <?php
                             echo Str::substr($user['last_message'], 0, 15) . '...';
                             ?>
                         </small>
-                        <small><?php echo Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $user['horario'])->format('H:i');
-                        ?>
+                        <small> {{$user['dia']}}
+                        
                         </small>
                     </div>
                 </a>

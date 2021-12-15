@@ -6,9 +6,11 @@ use App\Models\Contato;
 use App\Models\mensagen;
 use App\Models\perfilFill;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+
 
 
 class ListOfLastMessages extends Component
@@ -24,7 +26,7 @@ class ListOfLastMessages extends Component
 
         //Buscar Os contatos deste usuário
         $contatos =  Contato::where('user_id', Auth::id())->get();
-       
+
         //Buscar as  mensagens entre este contato e o usuário logado
         $last_user_and_its_last_messages = [];
 
@@ -42,8 +44,10 @@ class ListOfLastMessages extends Component
             $mensagens_nao_lidas = mensagen::Where('sendFromUser', $id_contato)->where('sendToUser', Auth::id())->where('read', 0)->get();
             //dd($mensagens_nao_lidas);
             if ($mensagens) {
-
                 $last_user_and_its_last_messages[$i]["horario"] = $mensagens->created_at;
+
+                $transformingDateInDay = $this->transformingDateInDay($last_user_and_its_last_messages[$i]["horario"]);
+                $last_user_and_its_last_messages[$i]["dia"] = $transformingDateInDay;
                 $last_user_and_its_last_messages[$i]["last_message"] = $mensagens->body;
                 $last_user_and_its_last_messages[$i]["sendFromUser"] = $mensagens->sendFromUser;
                 $last_user_and_its_last_messages[$i]["sendToUser"] = $mensagens->sendToUser;
@@ -53,11 +57,9 @@ class ListOfLastMessages extends Component
                 $last_user_and_its_last_messages[$i]["user_id"] = $perfilFill->user_id;
                 //Buscando nome deste usuário, nome que eu coloquei neste usuário
                 $nome_contato = User::where('id', $perfilFill->user_id)->first();
-                // dd($perfilFill);
                 $email_contato = $nome_contato->email;
                 $last_user_and_its_last_messages[$i]["email"] = $email_contato;
                 $last_user_and_its_last_messages[$i]["id_contato_user_id"] = $id_contato;
-                
                 $last_user_and_its_last_messages[$i]["nome_contato"] = $perfilFill->nome;
                 $last_user_and_its_last_messages[$i]["not_read"] = count($mensagens_nao_lidas);
             }
@@ -67,7 +69,6 @@ class ListOfLastMessages extends Component
         for ($i = 0; $i < count($last_user_and_its_last_messages); $i++) {
             if ($i + 1 < count($last_user_and_its_last_messages)) {
                 if ($last_user_and_its_last_messages[$i]["horario"]->lessThan($last_user_and_its_last_messages[$i + 1]["horario"])) {
-                    //dd("é maior");
                     $removendo_array = $last_user_and_its_last_messages[$i];
                     $last_user_and_its_last_messages[$i] = $last_user_and_its_last_messages[$i + 1];
                     $last_user_and_its_last_messages[$i + 1] = $removendo_array;
@@ -79,9 +80,41 @@ class ListOfLastMessages extends Component
 
         return $last_user_and_its_last_messages;
     }
+    public function transformingDateInDay($day)
+    {
+        if ($day->diffInDays() < 7) {
+            $horario = Carbon::createFromFormat('Y-m-d H:i:s', $day)->format('H:i');
+            if ($day->isYesterday()) {
+                return "Ontem";
+            }
+            if ($day->isToday()) {
+                return $horario;
+            }
+            if ($day->isMonday()) {
+                return "Segunda-Feira";
+            }
+            if ($day->isTuesday()) {
+                return "Terça-Feira às ";
+            }
+            if ($day->isWednesday()) {
+                return "Quarta-Feira";
+            }
+            if ($day->isThursday()) {
+                return "Quinta-Feira";
+            }
+            if ($day->isFriday()) {
+                return "Sexta-Feira";
+            }
+            if ($day->isSaturday()) {
+                return "Sábado";
+            }
+            if ($day->isSunday()) {
+                return "Domingo";
+            }
+        }
+    }
     public function mensagem_iniciada($contato)
     {
-        // dd($contato);
         $this->emit('conversaIniciada', $contato);
     }
 }
