@@ -235,9 +235,7 @@
         </div>
         <div class="row">
             <div class="col-3 bg-dark" id="lista-contatos">
-                <input class="form-control form-control-md " type="text" placeholder="Pesquisar por mensagens"
-                    id="search-messages">
-                <hr class="bg-light">
+                
                 <div class="border border-dark overflow-auto bg-dark text-light rounded style-overflow"
                     style="height: 75vh;">
                     @livewire('list-of-last-messages')

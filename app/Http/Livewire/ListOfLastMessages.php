@@ -14,12 +14,23 @@ use Livewire\Component;
 
 
 class ListOfLastMessages extends Component
-{
+{   
+    public $search_messages;
     protected $listeners = ['atualizar_last_messages' => '$refresh'];
     public function render()
     {
-        $last_user_and_its_last_messages = $this->lastMessages();
+        if($this->search_messages == "" || $this->search_messages == null){
+            $last_user_and_its_last_messages = $this->lastMessages();
+        }
+        else{
+            $last_user_and_its_last_messages = [];
+        }
         return view('livewire.list-of-last-messages', ['last_user_and_its_last_messages' => $last_user_and_its_last_messages]);
+    }
+    public function searchLastMessages(){
+        //Buscando Contato pelo nome
+        $contatos =  Contato::where('user_id', Auth::id())->where('nome_contato', 'like', "%$this->search_messages%")->get();
+        dd($contatos)  ;  
     }
     public function lastMessages()
     {
