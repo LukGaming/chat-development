@@ -46,7 +46,7 @@
                 </div>
             @endif
         @endforeach
-
+       
         <div class="skype-parent" style="height: 100%">
             <div class="d-flex justify-content-center ">
                 <div class="sub_div ">
@@ -61,6 +61,7 @@
                 </div>
             </div>
         </div>
+   
     @endif
     <script>
         var height = $("#scrollbar-mensagens").scrollTop();
