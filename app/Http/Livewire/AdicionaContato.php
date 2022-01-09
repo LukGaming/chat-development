@@ -16,7 +16,7 @@ class AdicionaContato extends Component
     public $nome_contato;
     public function render()
     {
-        
+
         return view('livewire.adiciona-contato');
     }
     public function salvarContato()
@@ -52,13 +52,12 @@ class AdicionaContato extends Component
                 }
                 //Verificando se eu já tenho este contato adicionado
                 $contatos = Contato::where('user_id', Auth::id())->get();
-                for($i=0; $i<count($contatos); $i++){
-                    if($contatos[$i]->email == $this->email){
+                for ($i = 0; $i < count($contatos); $i++) {
+                    if ($contatos[$i]->email == $this->email) {
                         $this->contato_ja_adicionado();
                         return;
                     }
                 }
-
             }
             Contato::create(["nome_contato" => $this->nome_contato, "email" => $this->email, "user_id" => Auth::id()]);
             $this->contatoCriado();

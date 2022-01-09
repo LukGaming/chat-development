@@ -65,7 +65,7 @@ class ListOfLastMessages extends Component
                 $split_pesquisa = str_split($this->search_messages);
                 //Preciso verificar qual posição do nome do contato tem a mesma string da pesquisa
                 
-                
+
                 $last_user_and_its_last_messages[$i]["not_read"] = count($mensagens_nao_lidas);
                 $last_user_and_its_last_messages[$i]["type"] = 0;
             }
