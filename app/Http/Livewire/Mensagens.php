@@ -37,14 +37,12 @@ class Mensagens extends Component
             $this->contato["email"] = $contato["email"];
             $this->contato["owner_user"] = $contato["owner_user"];
             $this->contato["imagem_perfil"] = $contato["caminho_imagem_perfil"];
-            $this->messages = mensagen::where('sendFromUser', Auth::id())->where('sendToUser', $this->contato["owner_user"])->orWhere('sendToUser', Auth::id())->where('sendFromUser', $this->contato["owner_user"])
-                ->get();
-            //Como o campo de mensagens será aberto, ir no banco de dados e ler todas as mensagens deste usuário
+            $this->messages = MensagensProvider::getAllMessages(Auth::id(), $this->contato["owner_user"]);
             $this->readingLastMessages($this->contato["owner_user"]);
         }
         if (gettype($contato) == "integer") {
             $this->contato = LastSeenProvider::getContactData($contato);
-            $this->messages = LastSeenProvider::readLastMessages($contato);
+            $this->messages = MensagensProvider::getAllMessages(Auth::id(), $this->contato["owner_user"]);
             $this->readingLastMessages($contato);
         }
         $this->dispatchBrowserEvent('iniciando_conversa');

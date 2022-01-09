@@ -21,4 +21,15 @@ class Mensagens extends ServiceProvider
         ->where('sendFromUser', $sendToUser)
         ->get();
     }
+    public static function updateMessageSeen($contato, $sendFromUser){
+        
+        return mensagen::where('sendFromUser', $contato)->where('sendToUser', $sendFromUser,)->update(["read" => 1]);
+    }
+    public static function getAllMessages($user, $contato){
+        return mensagen::where('sendFromUser', $user)
+        ->where('sendToUser', $contato)
+        ->orWhere('sendToUser',$user)
+        ->where('sendFromUser', $contato)
+            ->get();
+    }
 }
