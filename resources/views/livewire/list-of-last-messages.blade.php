@@ -42,10 +42,10 @@
             @foreach ($last_user_and_its_last_messages as $user)
                 @if ($user['type'] == 0)
                     <div class="h5 text-success">Contatos</div>
-                    <div class="list-group" style="margin-bottom: 5%; margin-right: 5px; " wire:poll='lastMessages()'
+                    <div class="list-group" style="margin-bottom: 5%; margin-right: 5px;  " wire:poll='lastMessages()'
                         wire:click="mensagem_iniciada({{ $user['id_contato_user_id'] }})"
                         wire:click="$emitTo('LastSeen', 'last_seen')">
-                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+                        <a href="#" class="list-group-item  flex-column align-items-start active" style="background-color: #e9b03e">
                             <div class="d-flex w-100 justify-content-between">
                                 <h4 style="font-weight: 300; font: inherit" class="mb-1" data-toggle="tooltip"
                                     data-placement="top" title="{{ $user['nome_contato'] }}">

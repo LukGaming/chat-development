@@ -23,8 +23,8 @@
             {{-- Se foi o usuário que enviou a mensagem --}}
             @if ($mensagem->sendFromUser == Auth::id())
 
-                <div class="message-send-message">
-                    <div class="message-send">
+                <div class="message-send-message ">
+                    <div class="message-send ">
                         {{ $mensagem->body }}
                         <span class="time  ">
                             <?php echo Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $mensagem->created_at)->format('H:i');
@@ -35,7 +35,7 @@
             @else
 
                 <div class="message-received-message">
-                    <div class="message-received">
+                    <div class="message-received ">
                         {{ $mensagem->body }}
                         <span class="time  ">
                             <?php echo Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $mensagem->created_at)->format('H:i');
