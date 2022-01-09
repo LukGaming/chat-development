@@ -27,8 +27,8 @@ class PerfilUserMensagem extends Component
             $this->contato["imagem_perfil"] = $contato["caminho_imagem_perfil"];
         }
         if (gettype($contato) == "integer") {
-           $email_contato = User::where('id', $contato)->first()->email;
-           $dados_contato = Contato::where('email', $email_contato)->first();
+            $email_contato = User::where('id', $contato)->first()->email;
+            $dados_contato = Contato::where('email', $email_contato)->first();
             $this->contato["nome_contato"] = $dados_contato->nome_contato;
             $this->contato["email"] = $dados_contato->email;
             $owner_user = User::where('email', $dados_contato->email)->first();

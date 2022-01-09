@@ -98,17 +98,27 @@ class LastSeenProvider extends ServiceProvider
             return "Visto a mais de um Ano";
         }
     }
-    public static function getContactData($contato)
+    public static function getContactData($contato, $method)
     {
-        $email_contato = User::where('id', $contato)->first()->email;
-        $dados_contato = Contato::where('email', $email_contato)->first();
-        $contact_data["nome_contato"] = $dados_contato->nome_contato;
-        $contact_data["email"] = $dados_contato->email;
-        $owner_user = User::where('email', $dados_contato->email)->first();
-        $imagem_perfil = perfilFill::where('user_id', $owner_user->id)->first();
-        $contact_data["owner_user"] = $owner_user->id;
-        $contact_data["imagem_perfil"] =  $imagem_perfil->caminho_imagem_perfil;
-        return $contact_data;
+        if($method == "integer"){
+            $email_contato = User::where('id', $contato)->first()->email;
+            $dados_contato = Contato::where('email', $email_contato)->first();
+            $contact_data["nome_contato"] = $dados_contato->nome_contato;
+            $contact_data["email"] = $dados_contato->email;
+            $owner_user = User::where('email', $dados_contato->email)->first();
+            $imagem_perfil = perfilFill::where('user_id', $owner_user->id)->first();
+            $contact_data["owner_user"] = $owner_user->id;
+            $contact_data["imagem_perfil"] =  $imagem_perfil->caminho_imagem_perfil;
+            return $contact_data;
+        }
+        else{
+            $contact_data["nome_contato"] = $contato["nome_contato"];
+            $contact_data["email"] = $contato["email"];
+            $contact_data["owner_user"] = $contato["owner_user"];
+            $contact_data["imagem_perfil"] = $contato["caminho_imagem_perfil"];
+            return $contact_data;
+        }
+      
     }
     public static function readLastMessages($contato)
     {

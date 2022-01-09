@@ -20,9 +20,9 @@
     .sidenav {
         height: 100%;
         /* 100% Full-height */
-        width: 0;
+        width: 0%;
         /* 0 width - change this with JavaScript */
-        position: fixed;
+        position: absolute;
         /* Stay in place */
         z-index: 1;
         /* Stay on top */
@@ -87,7 +87,8 @@
         text-align: center;
         color: white;
     }
-    .bg-new-dark{
+
+    .bg-new-dark {
         background-color: #111;
     }
 
@@ -134,20 +135,20 @@
     @livewireStyles
 
     {{-- Side Nav Contatos --}}
-    @livewire('listade-contatos')
+    {{-- @livewire('listade-contatos') --}}
     {{-- Side Nav Contatos --}}
 
 
     {{-- Side Nav Perfil --}}
-    @livewire('change-photo-perfil', ['imagem_perfil' => $dados_perfil->caminho_imagem_perfil,
-    'nome'=>$dados_perfil->nome, 'descricao_perfil'=>$dados_perfil->descricao_perfil]);
+    {{-- @livewire('change-photo-perfil', ['imagem_perfil' => $dados_perfil->caminho_imagem_perfil,
+    'nome'=>$dados_perfil->nome, 'descricao_perfil'=>$dados_perfil->descricao_perfil]); --}}
     {{-- Side Nav Perfil --}}
     <div class="container border-top border-dark" style="height: 100ch; margin-top: 5ch">
         <div class="row">
             <div class="col-3 bg-dark border-bottom">
                 <nav class="navbar navbar-expand-lg navbar-dark ">
                     <a class="navbar-brand" href="#">
-                       
+
                         @if ($dados_perfil->caminho_imagem_perfil)
                             @livewire('imagem-perfil',['imagem'=>$dados_perfil->caminho_imagem_perfil])
                         @else
@@ -163,7 +164,7 @@
                             <li class="nav-item " id="contatos">
                                 <a class="nav-link" href="#">
                                     <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-dark" onclick="openAndCloseNavOfContatos()">
+                                    <button type="button" class="btn btn-dark" onclick="openAndCloseNavContatos()">
                                         <div class="d-flex justify-content-center">Contatos</div>
                                     </button>
                                     <!-- Modal -->
@@ -182,7 +183,7 @@
                                                 <div class="modal-body">
                                                     <div class="  overflow-auto bg-dark text-light rounded style-overflow"
                                                         style="height: 50vh;">
-                                                        @livewire('listade-contatos')
+
                                                     </div>
                                                 </div>
                                                 <div class="d-flex justify-content-around" style="padding: 5%">
@@ -235,28 +236,33 @@
         </div>
         <div class="row">
             <div class="col-3 bg-dark" id="lista-contatos">
-                
+
                 <div class="border border-dark overflow-auto bg-dark text-light rounded style-overflow"
                     style="height: 75vh;">
                     @livewire('list-of-last-messages')
-                    
+
+                    @livewire('change-photo-perfil', ['imagem_perfil' => $dados_perfil->caminho_imagem_perfil,
+                    'nome'=>$dados_perfil->nome, 'descricao_perfil'=>$dados_perfil->descricao_perfil])
+                    @livewire('listade-contatos')
                 </div>
             </div>
-            <div class="col-9 bg-success" >
+            <div class="col-9 bg-success">
                 <div class="border border-dark overflow-auto bg-dark text-light rounded style-overflow mt-3"
                     style="height: 65vh;" id="scrollbar-mensagens">
                     <div class="d-flex justify-content-center">
-                        <div class="alert-nova-message" id="btnAlert-Nova-Mensagem" style="top: 0; z-index: 1; position: absolute; visibility: hidden;"
+                        <div class="alert-nova-message" id="btnAlert-Nova-Mensagem"
+                            style="top: 0; z-index: 1; position: absolute; visibility: hidden;"
                             onclick="scrollDownWhenMessageSend()">
                             <strong>Voce tem Novas Mensagens!</strong>
                         </div>
                     </div>
                     @livewire('mensagens')
-                    
+
                 </div>
             </div>
         </div>
         <script>
+            //**abrir e fechar perfil**/
             function openAndCloseNavOfPerfil() {
                 if ($navOpenPerfil == true) {
                     closeNavPerfil();
@@ -267,41 +273,42 @@
             var $navOpenPerfil = "";
 
             function openNavPerfil() {
-                document.getElementById("mySidenavPerfil").style.width = "25%";
+                document.getElementById("mySidenavPerfil").style.width = "100%";
                 $navOpenPerfil = true;
+                if ($navOpenContato == true) {
+                    closeNavContato();
+                }
             }
 
             function closeNavPerfil() {
-                document.getElementById("mySidenavPerfil").style.width = "0";
+                document.getElementById("mySidenavPerfil").style.width = "0%";
                 $navOpenPerfil = false;
             }
-            //**Perfil**/
+            //**abrir e fechar perfil**/
 
-
-
-            //**Contatos**/
-            function openAndCloseNavOfContatos() {
-                if ($navOpenContatos == true) {
-                    closeNavContatos();
+            //*abrir e fecharContatos
+            function openAndCloseNavContatos() {
+                if ($navOpenContato == true) {
+                    closeNavContato();
                 } else {
-                    openNavContatos();
+                    openNavContato();
                 }
             }
-            var $navOpenContatos = "";
+            var $navOpenContato = "";
 
-            function openNavContatos() {
-                document.getElementById("mySidenavContatos").style.width = "25%";
-                $navOpenContatos = true;
+            function openNavContato() {
+                if ($navOpenPerfil == true) {
+                    closeNavPerfil();
+                }
+                document.getElementById("mySidenavContatos").style.width = "100%";
+                $navOpenContato = true;
+
             }
 
-            function closeNavContatos() {
-                document.getElementById("mySidenavContatos").style.width = "0";
-                $navOpenContatos = false;
+            function closeNavContato() {
+                document.getElementById("mySidenavContatos").style.width = "0%";
+                $navOpenContato = false;
             }
-
-
-$teste = $(".teste");
-            //**Contatos**/
         </script>
         <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"

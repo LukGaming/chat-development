@@ -21,10 +21,7 @@ class Mensagens extends Component
 
     public function render()
     {
-        //Pegando as mensagens que fiz com esse usuário
-
-
-        return view('livewire.mensagens');
+         return view('livewire.mensagens');
     }
     public function conversaIniciada($contato)
     {
@@ -32,16 +29,12 @@ class Mensagens extends Component
         $this->dispatchBrowserEvent('meu_id', ["user_id" => Auth::id()]);
 
         if (gettype($contato) == "array") {
-            //dd($contato);
-            $this->contato["nome_contato"] = $contato["nome_contato"];
-            $this->contato["email"] = $contato["email"];
-            $this->contato["owner_user"] = $contato["owner_user"];
-            $this->contato["imagem_perfil"] = $contato["caminho_imagem_perfil"];
+            $this->contato = LastSeenProvider::getContactData($contato, $method = "array");
             $this->messages = MensagensProvider::getAllMessages(Auth::id(), $this->contato["owner_user"]);
             $this->readingLastMessages($this->contato["owner_user"]);
         }
         if (gettype($contato) == "integer") {
-            $this->contato = LastSeenProvider::getContactData($contato);
+            $this->contato = LastSeenProvider::getContactData($contato, $method = "integer");
             $this->messages = MensagensProvider::getAllMessages(Auth::id(), $this->contato["owner_user"]);
             $this->readingLastMessages($contato);
         }
@@ -54,7 +47,6 @@ class Mensagens extends Component
             return;
         } else {
             MensagensProvider::createMessage($this->inputMessage, Auth::id(), $this->contato["owner_user"]);
-           
             $this->inputMessage = "";
             $this->emit('mensagem_enviada', $this->contato["owner_user"]);
         }
