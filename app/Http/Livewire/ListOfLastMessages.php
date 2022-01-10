@@ -16,11 +16,20 @@ use Livewire\Component;
 class ListOfLastMessages extends Component
 {
     public $search_messages;
+    public $ultimas_mensagens = [];
     protected $listeners = ['atualizar_last_messages' => '$refresh'];
     public function render()
     {
         if ($this->search_messages == "" || $this->search_messages == null) {
             $last_user_and_its_last_messages = $this->lastMessages();
+            for($i=0; $i<count($last_user_and_its_last_messages);$i++){
+                if($last_user_and_its_last_messages[0]['not_read'] == 1){
+                    $this->emit('atualizando_mensagens');
+                }
+                // array_push($this->ultimas_mensagens, count($last_user_and_its_last_messages[$i])); 
+            }
+            //   dd($this->ultimas_mensagens) ;
+            
             return view('livewire.list-of-last-messages', ['last_user_and_its_last_messages' => $last_user_and_its_last_messages, 'pesquisa' => 0]);
         } else {
             $last_user_and_its_last_messages = $this->searchingContactsAndMessages();

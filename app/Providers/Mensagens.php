@@ -32,4 +32,7 @@ class Mensagens extends ServiceProvider
         ->where('sendFromUser', $contato)
             ->get();
     }
+    public static function deleteMensagem($id){
+        return mensagen::where('id', $id)->delete();
+    }
 }
